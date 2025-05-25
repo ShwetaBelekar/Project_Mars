@@ -18,8 +18,4 @@
     <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="136.0.7103.11300" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Utilities\" />
-  </ItemGroup>
-
 </Project>
