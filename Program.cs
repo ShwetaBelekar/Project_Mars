@@ -1,13 +1,15 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using Project_Mars.Pages;
+using Project_Mars.Utilities;
 
 
-public class Program 
+
+public class Program : CommonDriver
 {
     private static void Main(string[] args)
     {
-        IWebDriver driver = new ChromeDriver();
+        driver = new ChromeDriver();
 
         LoginPage loginPageObj = new LoginPage();
         loginPageObj.LoginActions(driver);
