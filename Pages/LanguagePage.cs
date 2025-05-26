@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using NUnit.Framework;
+using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,18 +30,31 @@ namespace Project_Mars.Pages
             addButton.Click();
             Thread.Sleep(5000);
 
-            IWebElement newLanguage = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/table/tbody[last()]/tr/td[1]"));
+            //IWebElement newLanguage = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/table/tbody[last()]/tr/td[1]"));
 
-            if (newLanguage.Text == "English")
-            {
-                Console.WriteLine("New Language record created Successfully!");
-            }
-            else
-            {
-                Console.WriteLine("New Language record has not been created!");
-            }
+            //if (newLanguage.Text == "English")
+            //{
+            //    Assert.Pass("New Language record created Successfully!");
+            //}
+            //else
+            //{
+            //    Assert.Fail("New Language record has not been created!");
+            //}
 
         }
+
+        public string GetLanguage(IWebDriver driver)
+        {
+            IWebElement newLanguage = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/table/tbody[last()]/tr/td[1]"));
+            return newLanguage.Text;
+        }
+
+        public string GetLevel(IWebDriver driver)
+        {
+            IWebElement newLevel = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/table/tbody[last()]/tr/td[2]"));
+            return newLevel.Text;
+        }
+
 
         public void EditLanguageRecord(IWebDriver driver)
         {
@@ -63,14 +77,15 @@ namespace Project_Mars.Pages
 
             if (newLevel.Text == "Fluent")
             {
-                Console.WriteLine("Fluent level is updated Successfully!");
+                Assert.Pass("Fluent level is updated Successfully!");
             }
             else
             {
-                Console.WriteLine("Fluent level is not updated Successfully!");
+                Assert.Fail("Fluent level is not updated Successfully!");
             }
 
         }
+
 
         public void DeleteLanguageRecord(IWebDriver driver)
         {
@@ -84,11 +99,11 @@ namespace Project_Mars.Pages
 
             if (language.Text == "English")
             {
-                Console.WriteLine("English is present");
+                Assert.Pass("English is present");
             }
             else
             {
-                Console.WriteLine("English is not present");
+                Assert.Fail("English is not present");
             }
         }
     }

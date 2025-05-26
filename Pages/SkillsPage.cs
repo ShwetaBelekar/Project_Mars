@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using NUnit.Framework;
+using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,11 +32,11 @@ namespace Project_Mars.Pages
 
             if (newSkill.Text == "Singing")
             {
-                Console.WriteLine("Singing skill is created successfully!");
+                Assert.Pass("Singing skill is created successfully!");
             }
             else
             {
-                Console.WriteLine("Singing skill is not created successfully!");
+                Assert.Fail("Singing skill is not created successfully!");
             }
 
         }
@@ -60,11 +61,11 @@ namespace Project_Mars.Pages
 
             if (newLevel.Text == "Intermediate")
             {
-                Console.WriteLine("Intermediate is updated!");
+                Assert.Pass("Intermediate is updated!");
             }
             else
             {
-                Console.WriteLine("Intermediate is not updated!");
+                Assert.Fail("Intermediate is not updated!");
             }
 
         }
@@ -80,11 +81,11 @@ namespace Project_Mars.Pages
 
             if (skills.Text == "Singing")
             {
-                Console.WriteLine("Singing is present!");
+                Assert.Pass("Singing is present!");
             }
             else
             {
-                Console.WriteLine("Singing is not present!");
+                Assert.Fail("Singing is not present!");
             }
 
         }
