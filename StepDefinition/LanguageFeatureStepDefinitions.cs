@@ -30,6 +30,7 @@ namespace Project_Mars.StepDefinition
         }
 
         [When("I create a language record")]
+
         public void WhenICreateALanguageRecord()
         {
             LanguagePage languagePageObj = new LanguagePage();
@@ -38,6 +39,7 @@ namespace Project_Mars.StepDefinition
         }
 
         [Then("the record should be created successfully")]
+       
         public void ThenTheRecordShouldBeCreatedSuccessfully()
         {
             LanguagePage languagePageObj = new LanguagePage();
@@ -47,5 +49,42 @@ namespace Project_Mars.StepDefinition
             Assert.That(newLanguage == "English", "Actual Language and expected language do not match");
             Assert.That(newLevel == "Basic", "Actual level and expected level do not match");
         }
+
+        [When("I update the {string} on an existing language record")]
+        
+        public void WhenIUpdateTheOnAnExistinglanguageRecord(string level)
+        {
+            LanguagePage languagePageObj = new LanguagePage();
+            languagePageObj.EditLanguageRecord(driver, level);
+        }
+
+        [Then("the record should have the updated {string}")]
+       
+        public void ThenTheRecordShouldHaveTheUpdated(string level)
+        {
+            LanguagePage languagePageObj = new LanguagePage();
+            string editedLevel = languagePageObj.GetLevel(driver);
+            Assert.That(editedLevel == "Fluent", "Expected Edited level and actual edited level do not match");
+        }
+
+        [When("I remove the existing language record")]
+        
+        public void WhenIDeleteTheExistingLanguageRecord()
+        {
+            LanguagePage languagePageObj = new LanguagePage();
+            languagePageObj.DeleteLanguageRecord(driver);
+        }
+
+        [Then("the record should not be present on the language list")]
+        
+        public void ThenTheRecordShouldNotBePresentOnTheLanguageList()
+        {
+            LanguagePage languagePageObj = new LanguagePage();
+            string deletedLanguage = languagePageObj.GetLanguage(driver);
+            Assert.That(deletedLanguage, Is.Not.EqualTo("English"), "Expected English to be deleted, but it still exists");
+        }
+
+
+
     }
 }

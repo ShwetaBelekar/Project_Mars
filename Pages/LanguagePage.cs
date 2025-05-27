@@ -56,7 +56,7 @@ namespace Project_Mars.Pages
         }
 
 
-        public void EditLanguageRecord(IWebDriver driver)
+        public void EditLanguageRecord(IWebDriver driver, string level)
         {
             Thread.Sleep(2000);
 
@@ -65,25 +65,33 @@ namespace Project_Mars.Pages
 
             IWebElement dropDownButton = driver.FindElement(By.XPath("//select[@class='ui dropdown']"));
             dropDownButton.Click();
+            Thread.Sleep(5000);
 
             IWebElement fluentOption = driver.FindElement(By.XPath("//option[@value='Fluent']"));
             fluentOption.Click();
+
 
             IWebElement updateButton = driver.FindElement(By.XPath("//input[@value='Update']"));
             updateButton.Click();
             Thread.Sleep(2000);
 
-            IWebElement newLevel = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/table/tbody[last()]/tr/td[2]"));
+            //IWebElement newLevel = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/table/tbody[last()]/tr/td[2]"));
 
-            if (newLevel.Text == "Fluent")
-            {
-                Assert.Pass("Fluent level is updated Successfully!");
-            }
-            else
-            {
-                Assert.Fail("Fluent level is not updated Successfully!");
-            }
+            //if (newLevel.Text == "Fluent")
+            //{
+            //    Assert.Pass("Fluent level is updated Successfully!");
+            //}
+            //else
+            //{
+            //    Assert.Fail("Fluent level is not updated Successfully!");
+            //}
 
+        }
+
+        public string GetEditedLevel(IWebDriver driver)
+        {
+            IWebElement editedLevel = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/table/tbody[last()]/tr/td[2]"));
+            return editedLevel.Text;
         }
 
 
@@ -95,16 +103,22 @@ namespace Project_Mars.Pages
             driver.Navigate().Refresh();
             Thread.Sleep(5000);
 
-            IWebElement language = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/table/tbody[last()]/tr/td[1]"));
+            //IWebElement language = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/table/tbody[last()]/tr/td[1]"));
 
-            if (language.Text == "English")
-            {
-                Assert.Pass("English is present");
-            }
-            else
-            {
-                Assert.Fail("English is not present");
-            }
+            //if (language.Text == "English")
+            //{
+            //    Assert.Pass("English is present");
+            //}
+            //else
+            //{
+            //    Assert.Fail("English is not present");
+            //}
+        }
+
+        public string GetDeletedLanguage(IWebDriver driver)
+        {
+            IWebElement deletedLanguage = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/table/tbody[last()]/tr/td[1]"));
+            return deletedLanguage.Text;
         }
     }
 }
