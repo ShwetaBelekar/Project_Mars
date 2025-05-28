@@ -28,17 +28,29 @@ namespace Project_Mars.Pages
             adddButton.Click();
             Thread.Sleep(2000);
 
+            //IWebElement newSkill = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[3]/div/div[2]/div/table/tbody[last()]/tr/td[1]"));
+
+            //if (newSkill.Text == "Singing")
+            //{
+            //    Assert.Pass("Singing skill is created successfully!");
+            //}
+            //else
+            //{
+            //    Assert.Fail("Singing skill is not created successfully!");
+            //}
+
+        }
+
+        public string GetSkill(IWebDriver driver)
+        {
             IWebElement newSkill = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[3]/div/div[2]/div/table/tbody[last()]/tr/td[1]"));
+            return newSkill.Text;
+        }
 
-            if (newSkill.Text == "Singing")
-            {
-                Assert.Pass("Singing skill is created successfully!");
-            }
-            else
-            {
-                Assert.Fail("Singing skill is not created successfully!");
-            }
-
+        public string GetSkillLevel(IWebDriver driver)
+        {
+            IWebElement newSkillLevel = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[3]/div/div[2]/div/table/tbody[last()]/tr/td[2]"));
+            return newSkillLevel.Text;
         }
 
         public void EditSkillRecord(IWebDriver driver)
@@ -57,17 +69,23 @@ namespace Project_Mars.Pages
             updateButton.Click();
             Thread.Sleep(2000);
 
-            IWebElement newLevel = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[3]/div/div[2]/div/table/tbody[last()]/tr/td[2]"));
+            //IWebElement newLevel = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[3]/div/div[2]/div/table/tbody[last()]/tr/td[2]"));
 
-            if (newLevel.Text == "Intermediate")
-            {
-                Assert.Pass("Intermediate is updated!");
-            }
-            else
-            {
-                Assert.Fail("Intermediate is not updated!");
-            }
+            //if (newLevel.Text == "Intermediate")
+            //{
+            //    Assert.Pass("Intermediate is updated!");
+            //}
+            //else
+            //{
+            //    Assert.Fail("Intermediate is not updated!");
+            //}
 
+        }
+
+        public string GetEditedSkillLevel(IWebDriver driver)
+        {
+            IWebElement editedSkilllevel = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[3]/div/div[2]/div/table/tbody[last()]/tr/td[2]"));
+            return editedSkilllevel.Text;
         }
 
         public void DeleteSkillRecord(IWebDriver driver)
@@ -77,17 +95,22 @@ namespace Project_Mars.Pages
             deleteButton.Click();
             Thread.Sleep(5000);
 
-            IWebElement skills = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[3]/div/div[2]/div/table/tbody[last()]/tr/td[1]"));
+            //IWebElement skills = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[3]/div/div[2]/div/table/tbody[last()]/tr/td[1]"));
 
-            if (skills.Text == "Singing")
-            {
-                Assert.Pass("Singing is present!");
-            }
-            else
-            {
-                Assert.Fail("Singing is not present!");
-            }
+            //if (skills.Text == "Singing")
+            //{
+            //    Assert.Pass("Singing is present!");
+            //}
+            //else
+            //{
+            //    Assert.Fail("Singing is not present!");
+            //}
 
+        }
+        public string GetDeletedSkill(IWebDriver driver)
+        {
+            IWebElement deletedSkill = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[3]/div/div[2]/div/table/tbody[last()]/tr/td[1]"));
+            return deletedSkill.Text;
         }
     }
 }

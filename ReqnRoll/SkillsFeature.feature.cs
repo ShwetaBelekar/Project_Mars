@@ -18,19 +18,19 @@ namespace Project_Mars.ReqnRoll
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Reqnroll", "2.0.0.0")]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [NUnit.Framework.TestFixtureAttribute()]
-    [NUnit.Framework.DescriptionAttribute("LanguageFeature")]
+    [NUnit.Framework.DescriptionAttribute("SkillsFeature")]
     [NUnit.Framework.FixtureLifeCycleAttribute(NUnit.Framework.LifeCycle.InstancePerTestCase)]
-    public partial class LanguageFeatureFeature
+    public partial class SkillsFeatureFeature
     {
         
         private global::Reqnroll.ITestRunner testRunner;
         
         private static string[] featureTags = ((string[])(null));
         
-        private static global::Reqnroll.FeatureInfo featureInfo = new global::Reqnroll.FeatureInfo(new global::System.Globalization.CultureInfo("en-US"), "ReqnRoll", "LanguageFeature", "As a Project_Mars user\r\nI would like to create, edit and delete Language records\r" +
-                "\nSo that I can manage Language successfully\r\n\r\nA short summary of the feature", global::Reqnroll.ProgrammingLanguage.CSharp, featureTags);
+        private static global::Reqnroll.FeatureInfo featureInfo = new global::Reqnroll.FeatureInfo(new global::System.Globalization.CultureInfo("en-US"), "ReqnRoll", "SkillsFeature", "As a Project_Mars user\r\nI would like to create, edit and delete Skill records\r\nSo" +
+                " that I can manage Skill successfully\r\n\r\nA short summary of the feature", global::Reqnroll.ProgrammingLanguage.CSharp, featureTags);
         
-#line 1 "LanguageFeature.feature"
+#line 1 "SkillsFeature.feature"
 #line hidden
         
         [NUnit.Framework.OneTimeSetUpAttribute()]
@@ -104,14 +104,14 @@ namespace Project_Mars.ReqnRoll
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("create language record with valid data")]
+        [NUnit.Framework.DescriptionAttribute("create skill record with valid data")]
         [NUnit.Framework.CategoryAttribute("regression")]
-        public async global::System.Threading.Tasks.Task CreateLanguageRecordWithValidData()
+        public async global::System.Threading.Tasks.Task CreateSkillRecordWithValidData()
         {
             string[] tagsOfScenario = new string[] {
                     "regression"};
             global::System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new global::System.Collections.Specialized.OrderedDictionary();
-            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("create language record with valid data", null, tagsOfScenario, argumentsOfScenario, featureTags);
+            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("create skill record with valid data", null, tagsOfScenario, argumentsOfScenario, featureTags);
 #line 9
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -123,30 +123,30 @@ this.ScenarioInitialize(scenarioInfo);
             {
                 await this.ScenarioStartAsync();
 #line 10
- await testRunner.GivenAsync("I logged into Project Mars successfully for language management", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
+ await testRunner.GivenAsync("I logged into Project Mars successfully for Skill management", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
 #line hidden
 #line 11
- await testRunner.WhenAsync("I navigate to Language", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
+ await testRunner.WhenAsync("I navigate to Skill", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
 #line 12
- await testRunner.WhenAsync("I create a language record", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
+ await testRunner.WhenAsync("I create a Skill record", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
 #line 13
- await testRunner.ThenAsync("the record should be created successfully for language", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
+ await testRunner.ThenAsync("the record should be created successfully for Skill", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
             }
             await this.ScenarioCleanupAsync();
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("edit existing language record with valid data")]
-        public async global::System.Threading.Tasks.Task EditExistingLanguageRecordWithValidData()
+        [NUnit.Framework.DescriptionAttribute("edit existing skill record with valid data")]
+        public async global::System.Threading.Tasks.Task EditExistingSkillRecordWithValidData()
         {
             string[] tagsOfScenario = ((string[])(null));
             global::System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new global::System.Collections.Specialized.OrderedDictionary();
-            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("edit existing language record with valid data", null, tagsOfScenario, argumentsOfScenario, featureTags);
+            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("edit existing skill record with valid data", null, tagsOfScenario, argumentsOfScenario, featureTags);
 #line 15
-this.ScenarioInitialize(scenarioInfo);
+ this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
             {
@@ -156,30 +156,30 @@ this.ScenarioInitialize(scenarioInfo);
             {
                 await this.ScenarioStartAsync();
 #line 16
-await testRunner.GivenAsync("I logged into Project Mars successfully for language management", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
+ await testRunner.GivenAsync("I logged into Project Mars successfully for Skill management", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
 #line hidden
 #line 17
-await testRunner.WhenAsync("I navigate to Language", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
+ await testRunner.WhenAsync("I navigate to Skill", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
 #line 18
-await testRunner.WhenAsync("I update the \'<Level>\' on an existing language record", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
+ await testRunner.WhenAsync("I update the level on an existing skill record", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
 #line 19
-await testRunner.ThenAsync("the record should have the updated \'<Level>\'", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
+ await testRunner.ThenAsync("the  skill record should have the updated level", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
             }
             await this.ScenarioCleanupAsync();
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("remove existing language record with valid data")]
-        public async global::System.Threading.Tasks.Task RemoveExistingLanguageRecordWithValidData()
+        [NUnit.Framework.DescriptionAttribute("remove existing skill record with valid data")]
+        public async global::System.Threading.Tasks.Task RemoveExistingSkillRecordWithValidData()
         {
             string[] tagsOfScenario = ((string[])(null));
             global::System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new global::System.Collections.Specialized.OrderedDictionary();
-            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("remove existing language record with valid data", null, tagsOfScenario, argumentsOfScenario, featureTags);
+            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("remove existing skill record with valid data", null, tagsOfScenario, argumentsOfScenario, featureTags);
 #line 21
-this.ScenarioInitialize(scenarioInfo);
+ this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
             {
@@ -189,16 +189,16 @@ this.ScenarioInitialize(scenarioInfo);
             {
                 await this.ScenarioStartAsync();
 #line 22
-await testRunner.GivenAsync("I logged into Project Mars successfully for language management", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
+ await testRunner.GivenAsync("I logged into Project Mars successfully for Skill management", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
 #line hidden
 #line 23
-await testRunner.WhenAsync("I navigate to Language", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
+ await testRunner.WhenAsync("I navigate to Skill", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
 #line 24
-await testRunner.WhenAsync("I remove the existing language record", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
+ await testRunner.WhenAsync("I remove the existing skill record", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
 #line 25
-await testRunner.ThenAsync("the record should not be present on the language list", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
+ await testRunner.ThenAsync("the record should not be present on the skill list", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
             }
             await this.ScenarioCleanupAsync();
