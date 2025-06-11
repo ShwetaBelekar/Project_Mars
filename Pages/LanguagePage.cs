@@ -1,5 +1,6 @@
 ﻿using NUnit.Framework;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,21 +11,23 @@ namespace Project_Mars.Pages
 {
     public class LanguagePage
     {
-        public void CreateLanguageRecord(IWebDriver driver)
+        public void CreateLanguageRecord(IWebDriver driver, string language, string level)
         {
             IWebElement addNewButton = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/table/thead/tr/th[3]/div"));
             addNewButton.Click();
             Thread.Sleep(2000);
 
             IWebElement addLanguageTextbox = driver.FindElement(By.XPath("//input[@placeholder='Add Language']"));
-            addLanguageTextbox.SendKeys("English");
+            addLanguageTextbox.SendKeys(language);
 
             IWebElement chooseLanguageLevelDropDown = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/div/div[2]/select"));
-            chooseLanguageLevelDropDown.Click();
-            Thread.Sleep(2000);
+            SelectElement selectLevel = new SelectElement(chooseLanguageLevelDropDown);
+            selectLevel.SelectByText(level);
+            //chooseLanguageLevelDropDown.Click();
+            //Thread.Sleep(2000);
 
-            IWebElement basicOption = driver.FindElement(By.XPath("//option[@value='Basic']"));
-            basicOption.Click();
+            //IWebElement basicOption = driver.FindElement(By.XPath("//option[@value='Basic']"));
+            //basicOption.Click();
 
             IWebElement addButton = driver.FindElement(By.XPath("//input[@value='Add']"));
             addButton.Click();
@@ -46,7 +49,7 @@ namespace Project_Mars.Pages
         public string GetLanguage(IWebDriver driver)
         {
             IWebElement newLanguage = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/table/tbody[last()]/tr/td[1]"));
-            return newLanguage.Text;
+            return newLanguage.Text; 
         }
 
         public string GetLevel(IWebDriver driver)
@@ -56,19 +59,25 @@ namespace Project_Mars.Pages
         }
 
 
-        public void EditLanguageRecord(IWebDriver driver, string level)
+        public void EditLanguageRecord(IWebDriver driver, string language, string level)
         {
             Thread.Sleep(2000);
 
             IWebElement editButton = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/table/tbody[3]/tr/td[3]/span[1]/i"));
             editButton.Click();
 
-            IWebElement dropDownButton = driver.FindElement(By.XPath("//select[@class='ui dropdown']"));
-            dropDownButton.Click();
-            Thread.Sleep(5000);
+            IWebElement languageTextbox = driver.FindElement(By.XPath("//input[@placeholder='Add Language']"));
+            languageTextbox.Clear();
+            languageTextbox.SendKeys(language);
 
-            IWebElement fluentOption = driver.FindElement(By.XPath("//option[@value='Fluent']"));
-            fluentOption.Click();
+            IWebElement dropDownButton = driver.FindElement(By.XPath("//select[@class='ui dropdown']"));
+            SelectElement selectLevel = new SelectElement(dropDownButton);
+            selectLevel.SelectByText(level);
+            //dropDownButton.Click();
+            //Thread.Sleep(5000);
+
+            //IWebElement fluentOption = driver.FindElement(By.XPath("//option[@value='Fluent']"));
+            //fluentOption.Click();
 
 
             IWebElement updateButton = driver.FindElement(By.XPath("//input[@value='Update']"));
@@ -86,6 +95,11 @@ namespace Project_Mars.Pages
             //    Assert.Fail("Fluent level is not updated Successfully!");
             //}
 
+        }
+        public string GetEditedLanguage(IWebDriver driver)
+        {
+            IWebElement editedLanguage = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/table/tbody[last()]/tr/td[1]"));
+            return editedLanguage.Text;        
         }
 
         public string GetEditedLevel(IWebDriver driver)

@@ -18,19 +18,21 @@ namespace Project_Mars.ReqnRoll
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Reqnroll", "2.0.0.0")]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [NUnit.Framework.TestFixtureAttribute()]
-    [NUnit.Framework.DescriptionAttribute("LanguageFeature")]
+    [NUnit.Framework.DescriptionAttribute("SigninFeature")]
     [NUnit.Framework.FixtureLifeCycleAttribute(NUnit.Framework.LifeCycle.InstancePerTestCase)]
-    public partial class LanguageFeatureFeature
+    public partial class SigninFeatureFeature
     {
         
         private global::Reqnroll.ITestRunner testRunner;
         
         private static string[] featureTags = ((string[])(null));
         
-        private static global::Reqnroll.FeatureInfo featureInfo = new global::Reqnroll.FeatureInfo(new global::System.Globalization.CultureInfo("en-US"), "ReqnRoll", "LanguageFeature", "As a Project_Mars user\r\nI would like to create, edit and delete Language records\r" +
-                "\nSo that I can manage Language successfully\r\n\r\nA short summary of the feature", global::Reqnroll.ProgrammingLanguage.CSharp, featureTags);
+        private static global::Reqnroll.FeatureInfo featureInfo = new global::Reqnroll.FeatureInfo(new global::System.Globalization.CultureInfo("en-US"), "ReqnRoll", "SigninFeature", "As a registered user I want to login to the portal with valid credentials \r\nand a" +
+                "dd, edit and delete records in the language and skill module\r\nso that i can show" +
+                " my language and skill proficiency to the recruiters\r\nA short summary of the fea" +
+                "ture", global::Reqnroll.ProgrammingLanguage.CSharp, featureTags);
         
-#line 1 "LanguageFeature.feature"
+#line 1 "SigninFeature.feature"
 #line hidden
         
         [NUnit.Framework.OneTimeSetUpAttribute()]
@@ -104,26 +106,15 @@ namespace Project_Mars.ReqnRoll
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("create language and level record with valid data")]
-        [NUnit.Framework.CategoryAttribute("regression")]
-        [NUnit.Framework.TestCaseAttribute("German", "Fluent", null)]
-        [NUnit.Framework.TestCaseAttribute("Java", "Basic", null)]
-        [NUnit.Framework.TestCaseAttribute("C#", "Basic", null)]
-        [NUnit.Framework.TestCaseAttribute("EnGlish", "Fluent", null)]
-        public async global::System.Threading.Tasks.Task CreateLanguageAndLevelRecordWithValidData(string language, string level, string[] exampleTags)
+        [NUnit.Framework.DescriptionAttribute("Check if user is able to Signin to the portal with valid data")]
+        [NUnit.Framework.CategoryAttribute("tag1")]
+        public async global::System.Threading.Tasks.Task CheckIfUserIsAbleToSigninToThePortalWithValidData()
         {
-            string[] @__tags = new string[] {
-                    "regression"};
-            if ((exampleTags != null))
-            {
-                @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
-            }
-            string[] tagsOfScenario = @__tags;
+            string[] tagsOfScenario = new string[] {
+                    "tag1"};
             global::System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new global::System.Collections.Specialized.OrderedDictionary();
-            argumentsOfScenario.Add("Language", language);
-            argumentsOfScenario.Add("Level", level);
-            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("create language and level record with valid data", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 9
+            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Check if user is able to Signin to the portal with valid data", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 8
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
@@ -133,36 +124,32 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 await this.ScenarioStartAsync();
+#line 9
+ await testRunner.GivenAsync("I get into the homepage", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
+#line hidden
 #line 10
- await testRunner.GivenAsync("I logged into Project Mars successfully for language management", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
+ await testRunner.WhenAsync("I enter valid credentials", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
 #line 11
- await testRunner.WhenAsync("I navigate to Language", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
-#line hidden
-#line 12
- await testRunner.WhenAsync(string.Format("I create multiple \'{0}\' and \'{1}\' in language record", language, level), ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
-#line hidden
-#line 13
- await testRunner.ThenAsync(string.Format("the multiple \'<language>\' and \'{0}\' record should be created successfully", level), ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
+ await testRunner.ThenAsync("I should be able to Signin successfully", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
             }
             await this.ScenarioCleanupAsync();
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("edit existing language record with valid data")]
-        [NUnit.Framework.TestCaseAttribute("German", "Fluent", null)]
-        [NUnit.Framework.TestCaseAttribute("Java", "Basic", null)]
-        [NUnit.Framework.TestCaseAttribute("C#", "Basic", null)]
-        [NUnit.Framework.TestCaseAttribute("French", "Fluent", null)]
-        public async global::System.Threading.Tasks.Task EditExistingLanguageRecordWithValidData(string language, string level, string[] exampleTags)
+        [NUnit.Framework.DescriptionAttribute("Check if user is unable to Signin to the portal with blank email and valid passwo" +
+            "rd")]
+        [NUnit.Framework.TestCaseAttribute("", "Tonymoney@2025", null)]
+        public async global::System.Threading.Tasks.Task CheckIfUserIsUnableToSigninToThePortalWithBlankEmailAndValidPassword(string email, string password, string[] exampleTags)
         {
             string[] tagsOfScenario = exampleTags;
             global::System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new global::System.Collections.Specialized.OrderedDictionary();
-            argumentsOfScenario.Add("Language", language);
-            argumentsOfScenario.Add("Level", level);
-            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("edit existing language record with valid data", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 22
+            argumentsOfScenario.Add("email", email);
+            argumentsOfScenario.Add("password", password);
+            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Check if user is unable to Signin to the portal with blank email and valid passwo" +
+                    "rd", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 14
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
@@ -172,31 +159,33 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 await this.ScenarioStartAsync();
-#line 23
-await testRunner.GivenAsync("I logged into Project Mars successfully for language management", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
+#line 15
+ await testRunner.GivenAsync("I get into the homepage", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
 #line hidden
-#line 24
-await testRunner.WhenAsync("I navigate to Language", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
+#line 16
+ await testRunner.WhenAsync(string.Format("I enter blank \'{0}\' and valid \'{1}\'", email, password), ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
-#line 25
-await testRunner.WhenAsync(string.Format("I update the \'{0}\' and \'{1}\' on an existing language record", language, level), ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
-#line hidden
-#line 26
-await testRunner.ThenAsync(string.Format("the record should have the updated \'{0}\' and \'{1}\'", language, level), ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
+#line 17
+ await testRunner.ThenAsync(string.Format("I should see an error message for blank \'{0}\'", email), ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
             }
             await this.ScenarioCleanupAsync();
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("remove existing language record with valid data")]
-        public async global::System.Threading.Tasks.Task RemoveExistingLanguageRecordWithValidData()
+        [NUnit.Framework.DescriptionAttribute("Check if user is unable to Signin to the portal with valid email and blank passwo" +
+            "rd")]
+        [NUnit.Framework.TestCaseAttribute("moneytony@ymail.com", "", null)]
+        public async global::System.Threading.Tasks.Task CheckIfUserIsUnableToSigninToThePortalWithValidEmailAndBlankPassword(string email, string password, string[] exampleTags)
         {
-            string[] tagsOfScenario = ((string[])(null));
+            string[] tagsOfScenario = exampleTags;
             global::System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new global::System.Collections.Specialized.OrderedDictionary();
-            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("remove existing language record with valid data", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 35
-this.ScenarioInitialize(scenarioInfo);
+            argumentsOfScenario.Add("email", email);
+            argumentsOfScenario.Add("password", password);
+            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Check if user is unable to Signin to the portal with valid email and blank passwo" +
+                    "rd", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 23
+ this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
             {
@@ -205,17 +194,14 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 await this.ScenarioStartAsync();
-#line 36
-await testRunner.GivenAsync("I logged into Project Mars successfully for language management", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
+#line 24
+ await testRunner.GivenAsync("I get into the homepage", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
 #line hidden
-#line 37
-await testRunner.WhenAsync("I navigate to Language", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
+#line 25
+ await testRunner.WhenAsync(string.Format("I enter valid \'{0}\' and blank \'{1}\'", email, password), ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
-#line 38
-await testRunner.WhenAsync("I remove the existing language record", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
-#line hidden
-#line 39
-await testRunner.ThenAsync("the record should not be present on the language list", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
+#line 26
+ await testRunner.ThenAsync(string.Format("I should see an error message for \'{0}\'", password), ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
             }
             await this.ScenarioCleanupAsync();

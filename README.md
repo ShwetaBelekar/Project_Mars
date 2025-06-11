@@ -25,8 +25,11 @@ Prerequisites
 • Chrome Browser: Required for Selenium WebDriver (ChromeDriver version must match your browser version via
 WebDriverManager)
 
+
 Project Structure
 
-Features/           # Gherkin feature files
- Steps/              # C# step implementations
-Pages/              # Page Object Model classes
+•Features         # Gherkin feature files
+•Steps            # C# step implementations
+•Pages            # Page Object Model classes
+•Utilities        # For the process on inheritance
+

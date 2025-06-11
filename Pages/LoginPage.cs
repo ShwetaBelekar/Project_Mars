@@ -14,7 +14,7 @@ namespace Project_Mars.Pages
     {
         public void LoginActions(IWebDriver driver)
         {
-         
+
             //driver = new ChromeDriver();
             driver.Navigate().GoToUrl("http://localhost:5003/Home");
             driver.Manage().Window.Maximize();
@@ -37,7 +37,7 @@ namespace Project_Mars.Pages
 
         public void VerifyUserInHomePage(IWebDriver driver)
         {
-      
+
             IWebElement hitony = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/div[1]/div[2]/div/span"));
 
             if (hitony.Text == "Hi Tony")
@@ -48,6 +48,8 @@ namespace Project_Mars.Pages
             {
                 Console.WriteLine("User has not logged in. Test Failed!");
             }
+
+
 
 
         }
