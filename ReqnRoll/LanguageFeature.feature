@@ -17,3 +17,15 @@ Scenario Outline: Create valid language and level record
 	| Java     | Basic  |
 	| C#       | Basic  |
 	| EnGlish  | Fluent |
+
+	Scenario Outline: Edit existing language and level record
+	Given I login to Project Mars
+	When I navigate to language
+	When I edit existing '<Language>' and '<Level>' record
+	Then the record for '<Language>' and '<Level>' should be updated successfully
+	Examples:
+	| Language | Level            |
+	| Spanish  | Fluent           |
+	| Python   | Basic            |
+	| Marathi  | Native/Bilingual |
+	| Hindi    | Fluent           |

@@ -52,6 +52,23 @@ namespace Project_Mars.StepDefinition
                 Assert.Fail("record creation unsuccessful");
             }
         }
+        [When("I edit existing {string} and {string} record")]
+        public void WhenIEditExistingAndRecord(string Language, string Level)
+        {
+            LanguagePage languagePageObj = new LanguagePage();
+            languagePageObj.EditLanguageRecord(driver, Language, Level);
+        }
+
+        [Then("the record for {string} and {string} should be updated successfully")]
+        public void ThenTheRecordForAndShouldBeUpdatedSuccessfully(string Language, string Level)
+        {
+            LanguagePage languagePageObj = new LanguagePage();
+            string editedLanguage = languagePageObj.GetEditedLanguage(driver);
+            string editedLevel = languagePageObj.GetEditedLevel(driver);
+            Assert.That(editedLanguage == Language, "Expected edited language and actual edited language do not match");
+            Assert.That(editedLevel == Level, "Expected edited level and actual edited level do not match");
+        }
+
 
 
     }
