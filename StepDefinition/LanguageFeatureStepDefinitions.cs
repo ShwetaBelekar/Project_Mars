@@ -52,6 +52,30 @@ namespace Project_Mars.StepDefinition
                 Assert.Fail("record creation unsuccessful");
             }
         }
+        [When("I create blank {string} and valid {string} record")]
+        public void WhenICreateBlankAndValidRecord(string Language, string Level)
+        {
+            LanguagePage languagePageObj = new LanguagePage();
+            languagePageObj.CreateBlankLanguageRecord(driver, Language, Level);
+        }
+
+        [Then("I should see error message for blank {string} name")]
+        public void ThenIShouldSeeErrorMessageForBlankName(string Language)
+        {
+            LanguagePage languagePageObj = new LanguagePage();
+            string popupAlert = languagePageObj.BlankLanguage(driver);
+            if (popupAlert == "Please enter language and level")
+            {
+                Assert.Pass("Blank language record not accepted");
+            }
+            else
+            {
+                Assert.Fail("Blank language record is accepted");
+            }
+
+
+        }
+
         [When("I edit existing {string} and {string} record")]
         public void WhenIEditExistingAndRecord(string Language, string Level)
         {

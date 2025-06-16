@@ -18,6 +18,16 @@ Scenario Outline: Create valid language and level record
 	| C#       | Basic  |
 	| EnGlish  | Fluent |
 
+	Scenario Outline: Create blank language and valid level record
+	Given I login to Project Mars
+	When I navigate to language
+	When I create blank '<Language>' and valid '<Level>' record
+	Then I should see error message for blank '<Language>' name
+	Examples: 
+	| Language | Level  |
+	|          | Fluent |
+
+
 	Scenario Outline: Edit existing language and level record
 	Given I login to Project Mars
 	When I navigate to language
