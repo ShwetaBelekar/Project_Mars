@@ -203,6 +203,44 @@ this.ScenarioInitialize(scenarioInfo);
             }
             await this.ScenarioCleanupAsync();
         }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Create Skill record")]
+        [NUnit.Framework.TestCaseAttribute("Drawing", "Beginner", null)]
+        [NUnit.Framework.TestCaseAttribute("Painting", "Expert", null)]
+        [NUnit.Framework.TestCaseAttribute("Dance", "Intermediate", null)]
+        public async global::System.Threading.Tasks.Task CreateSkillRecord(string skill, string level, string[] exampleTags)
+        {
+            string[] tagsOfScenario = exampleTags;
+            global::System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new global::System.Collections.Specialized.OrderedDictionary();
+            argumentsOfScenario.Add("skill", skill);
+            argumentsOfScenario.Add("level", level);
+            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Create Skill record", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 27
+ this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                await this.ScenarioStartAsync();
+#line 28
+ await testRunner.GivenAsync("I logged into Project Mars successfully for Skill management", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
+#line hidden
+#line 29
+ await testRunner.WhenAsync("I navigate to Skill", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
+#line hidden
+#line 30
+ await testRunner.WhenAsync(string.Format("I create \'{0}\' and \'{1}\' record", skill, level), ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
+#line hidden
+#line 31
+ await testRunner.ThenAsync(string.Format("the record for \'{0}\' and \'{1}\' should be created successfully", skill, level), ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
+#line hidden
+            }
+            await this.ScenarioCleanupAsync();
+        }
     }
 }
 #pragma warning restore

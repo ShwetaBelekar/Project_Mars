@@ -1,5 +1,7 @@
 using System;
 using NUnit.Framework;
+using OpenQA.Selenium;
+using OpenQA.Selenium.BiDi.Modules.Log;
 using OpenQA.Selenium.Chrome;
 using Project_Mars.Pages;
 using Project_Mars.Utilities;
@@ -29,6 +31,32 @@ namespace Project_Mars.StepDefinition
             HomeToSkillsPage homeToSkillsPageObj = new HomeToSkillsPage();
             homeToSkillsPageObj.NavigateToSkills(driver);
         }
+        [When("I create {string} and {string} record")]
+        public void WhenICreateAndRecord(string skill, string level)
+        {
+            SkillsPage skillsPageObj = new SkillsPage();
+            skillsPageObj.CreateSkillLevelRecord(driver, skill, level);
+        }
+        [Then("the record for {string} and {string} should be created successfully")]
+        public void ThenTheRecordForAndShouldBeCreatedSuccessfully(string skill, string level)
+        {
+            SkillsPage skillsPageObj = new SkillsPage();
+            IWebElement newSkill = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[3]/div/div[2]/div/table/tbody[last()]/tr/td[1]"));
+            IWebElement newLevel = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[3]/div/div[2]/div/table/tbody[last()]/tr/td[2]"));
+            if (newSkill.Text == skill && newLevel.Text == level)
+            {
+                Assert.Pass("record created successfully");
+            }
+            else
+            {
+                Assert.Fail("record creation unsuccessful");
+            }
+
+        }
+
+
+
+
 
         [When("I create a Skill record")]
         public void WhenICreateASkillRecord()
@@ -36,6 +64,7 @@ namespace Project_Mars.StepDefinition
             SkillsPage skillsPageObj = new SkillsPage();
             skillsPageObj.CreateSkillRecord(driver);
         }
+
 
         [Then("the record should be created successfully for Skill")]
         public void ThenTheRecordShouldBeCreatedSuccessfullyForSkill()

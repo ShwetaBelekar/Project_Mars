@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Turnupportal2025.Utilities;
 
 namespace Project_Mars.Pages
 {
@@ -60,6 +61,29 @@ namespace Project_Mars.Pages
             return newLevel.Text;
         }
 
+        public void CreateDuplicateLanguageLevelRecord(IWebDriver driver, string language, string level)
+        {
+            IWebElement addNewButton = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/table/thead/tr/th[3]/div"));
+            addNewButton.Click();
+            Thread.Sleep(2000);
+
+            IWebElement addLanguageTextbox = driver.FindElement(By.XPath("//input[@placeholder='Add Language']"));
+            addLanguageTextbox.SendKeys(language);
+
+            IWebElement chooseLanguageLevelDropDown = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/div/div[2]/select"));
+            chooseLanguageLevelDropDown.SendKeys(level);
+
+            IWebElement addButton = driver.FindElement(By.XPath("//input[@value='Add']"));
+            addButton.Click();
+            Thread.Sleep(5000);
+        }
+        public string DuplicateLanguageLevel(IWebDriver driver)
+        {
+            IWebElement popupAlert = driver.FindElement(By.XPath("//div[@class='ns-box ns-growl ns-effect-jelly ns-type-error ns-show']"));
+            return popupAlert.Text;
+        }
+        
+
         public void CreateBlankLanguageRecord(IWebDriver driver, string language, string level)
         {
             IWebElement addNewButton = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/table/thead/tr/th[3]/div"));
@@ -81,11 +105,31 @@ namespace Project_Mars.Pages
         {
             IWebElement popupAlert = driver.FindElement(By.XPath("//div[@class='ns-box ns-growl ns-effect-jelly ns-type-error ns-show']"));
             return popupAlert.Text;
-           
-
         }
 
+        public void CreateBlankLevelRecord(IWebDriver driver, string language, string level)
+        {
+            IWebElement addNewButton = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/table/thead/tr/th[3]/div"));
+            addNewButton.Click();
+            Thread.Sleep(2000);
 
+            IWebElement addLanguageTextbox = driver.FindElement(By.XPath("//input[@placeholder='Add Language']"));
+            addLanguageTextbox.SendKeys(language);
+
+            IWebElement chooseLanguageLevelDropDown = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/div/div[2]/select"));
+            chooseLanguageLevelDropDown.SendKeys(level);
+
+            IWebElement addButton = driver.FindElement(By.XPath("//input[@value='Add']"));
+            addButton.Click();
+            Thread.Sleep(5000);
+        }
+
+        public string BlankLevel(IWebDriver driver)
+        {
+            IWebElement popupAlert = driver.FindElement(By.XPath("//div[contains(@class, 'ns-') and contains(@class, '-error')]"));
+            return popupAlert.Text;
+        }
+        
 
         public void EditLanguageRecord(IWebDriver driver, string language, string level)
         {

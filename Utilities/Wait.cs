@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Turnupportal2025.Utilities
 {
-    public class Wait
+    public class wait
     {
         public static void WaitToBeClickable(IWebDriver driver, string locatorType, string locatorValue, int seconds)
         {

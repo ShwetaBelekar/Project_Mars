@@ -1,6 +1,7 @@
 using System;
 using NUnit.Framework;
 using OpenQA.Selenium;
+using OpenQA.Selenium.BiDi.Modules.Log;
 using OpenQA.Selenium.Chrome;
 using Project_Mars.Pages;
 using Project_Mars.Utilities;
@@ -52,6 +53,30 @@ namespace Project_Mars.StepDefinition
                 Assert.Fail("record creation unsuccessful");
             }
         }
+        [When("I create duplicate record for {string} and {string}")]
+        public void WhenICreateDuplicateRecordForAnd(string Language, string Level)
+        {
+            LanguagePage languagePageObj = new LanguagePage();
+            languagePageObj.CreateDuplicateLanguageLevelRecord(driver, Language, Level);
+        }
+        [Then("I should see error message for duplicate {string} and {string}")]
+        public void ThenIShouldSeeErrorMessageForDuplicateAnd(string Language, string Level)
+        {
+            LanguagePage languagePageObj = new LanguagePage();
+
+            IWebElement popupAlert = driver.FindElement(By.XPath("//div[@class='ns-box ns-growl ns-effect-jelly ns-type-error ns-show']"));
+            
+            if (popupAlert.Text == "This language is already exist in your language list")
+            {
+                Assert.Pass("Duplicate record not accepted");
+            }
+            else
+            {
+                Assert.Fail("Duplicate record is accepted");
+            }
+        }
+
+    
         [When("I create blank {string} and valid {string} record")]
         public void WhenICreateBlankAndValidRecord(string Language, string Level)
         {
@@ -76,6 +101,28 @@ namespace Project_Mars.StepDefinition
 
         }
 
+        [When("I create valid {string} and blank {string} record")]
+        public void WhenICreateValidAndBlankRecord(string Language, string Level)
+        {
+            LanguagePage languagePageObj = new LanguagePage();
+            languagePageObj.CreateBlankLevelRecord(driver, Language, Level);
+        }
+
+        [Then("I should see error message for blank {string}")]
+        public void ThenIShouldSeeErrorMessageForBlank(string Level)
+        {
+            LanguagePage languagePageObj = new LanguagePage();
+            string popupAlert = languagePageObj.BlankLevel(driver);
+            if (popupAlert == "Please enter language and level")
+            {
+                Assert.Pass("Blank level record not accepted");
+            }
+            else
+            {
+                Assert.Fail("Blank level record is accepted");
+            }
+        }
+        
         [When("I edit existing {string} and {string} record")]
         public void WhenIEditExistingAndRecord(string Language, string Level)
         {
