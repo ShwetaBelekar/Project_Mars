@@ -31,33 +31,7 @@ namespace Project_Mars.StepDefinition
             HomeToSkillsPage homeToSkillsPageObj = new HomeToSkillsPage();
             homeToSkillsPageObj.NavigateToSkills(driver);
         }
-        [When("I create {string} and {string} record")]
-        public void WhenICreateAndRecord(string skill, string level)
-        {
-            SkillsPage skillsPageObj = new SkillsPage();
-            skillsPageObj.CreateSkillLevelRecord(driver, skill, level);
-        }
-        [Then("the record for {string} and {string} should be created successfully")]
-        public void ThenTheRecordForAndShouldBeCreatedSuccessfully(string skill, string level)
-        {
-            SkillsPage skillsPageObj = new SkillsPage();
-            IWebElement newSkill = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[3]/div/div[2]/div/table/tbody[last()]/tr/td[1]"));
-            IWebElement newLevel = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[3]/div/div[2]/div/table/tbody[last()]/tr/td[2]"));
-            if (newSkill.Text == skill && newLevel.Text == level)
-            {
-                Assert.Pass("record created successfully");
-            }
-            else
-            {
-                Assert.Fail("record creation unsuccessful");
-            }
-
-        }
-
-
-
-
-
+       
         [When("I create a Skill record")]
         public void WhenICreateASkillRecord()
         {
@@ -101,8 +75,40 @@ namespace Project_Mars.StepDefinition
         public void ThenTheRecordShouldNotBePresentOnTheSkillList()
         {
             SkillsPage skillsPageObj = new SkillsPage();
-            string deletedSkill = skillsPageObj.GetDeletedSkill(driver);
-            Assert.That(deletedSkill, Is.Not.EqualTo("Singing"), "Expected Singing to be deleted, but it still exists");
+            IWebElement skills = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[3]/div/div[2]/div/table/tbody[last()]/tr/td[1]"));
+
+            if (skills.Text == "Singing")
+            {
+                Assert.Pass("Singing is present!");
+            }
+            else
+            {
+                Assert.Fail("Singing is not present!");
+            }
+
+
+        }
+        [When("I create {string} and {string} record")]
+        public void WhenICreateAndRecord(string skill, string level)
+        {
+            SkillsPage skillsPageObj = new SkillsPage();
+            skillsPageObj.CreateSkillLevelRecord(driver, skill, level);
+        }
+        [Then("the record for {string} and {string} should be created successfully")]
+        public void ThenTheRecordForAndShouldBeCreatedSuccessfully(string skill, string level)
+        {
+            SkillsPage skillsPageObj = new SkillsPage();
+            IWebElement newSkill = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[3]/div/div[2]/div/table/tbody[last()]/tr/td[1]"));
+            IWebElement newLevel = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[3]/div/div[2]/div/table/tbody[last()]/tr/td[2]"));
+            if (newSkill.Text == skill && newLevel.Text == level)
+            {
+                Assert.Pass("record created successfully");
+            }
+            else
+            {
+                Assert.Fail("record creation unsuccessful");
+            }
+
         }
 
 

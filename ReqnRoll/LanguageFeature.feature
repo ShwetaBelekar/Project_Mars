@@ -12,24 +12,42 @@ Scenario Outline: Create valid language and level record
 	When I create valid '<Language>' and valid '<Level>' record
 	Then the record for valid '<Language>' and '<Level>' should be created successfully
 	Examples:
-	| Language | Level  |
-	| German   | Fluent |
-	| Java     | Basic  |
-	| C#       | Basic  |
-	
+	| Language | Level            |
+	| German   | Native/Bilingual |
+	| Java     | Basic            |
+	| C#       | Fluent           |
+	| EnGlish  | Conversational   |
 
-Scenario Outline: Create duplicate language and level record
-Given I login to Project Mars
+	Scenario Outline: Update valid language and level record
+	Given I login to Project Mars
 	When I navigate to language
-	When I create duplicate record for '<Language>' and '<Level>' 
-	Then I should see error message for duplicate '<Language>' and '<Level>'
-	Examples: 
-	| Language | Level  |
-	| English  | Fluent |
+	When I update '<OldLanguage>' and '<OldLevel>' with new '<NewLanguage >' and '<NewLevel>'
+	Then the '<NewLanguage>' and '<NewLevel>' should be updated successfully
+	Examples:
+	| OldLanguage | OldLevel         | NewLanguage | NewLevel            |
+	| German      | Native/Bilingual | Spanish     | Fluent              |
+	| Java        | Basic            | Python      | Conversational      |
+	| C#          | Fluent           | Ruby        | Native/Bilingual    |
+	| English     | Conversational   | French      | Basic               |
 	
+	Scenario Outline: Edit existing language and level record
+	Given I login to Project Mars
+	When I navigate to language
+	When I edit existing '<Language>' and '<Level>' record
+	Then the record for '<Language>' and '<Level>' should be updated successfully
+	Examples:
+	| Language | Level            |
+	| Spanish  | Conversational   |  
+	| Python   | Basic            |
+	| Marathi  | Native/Bilingual |
+	| Hindi    | Fluent           |
 
-
-
+	Scenario: remove existing language and level record
+	Given I login to Project Mars 
+	When  I navigate to language
+	When I remove the existing language and level record
+	Then the record should not be present
+	
 
 	Scenario Outline: Create blank language and valid level record
 	Given I login to Project Mars
@@ -49,16 +67,24 @@ Given I login to Project Mars
 	| Language | Level |
 	| French   |       |
 	
-	
-	
-	Scenario Outline: Edit existing language and level record
+	Scenario Outline: Create language record with invalid data
 	Given I login to Project Mars
 	When I navigate to language
-	When I edit existing '<Language>' and '<Level>' record
-	Then the record for '<Language>' and '<Level>' should be updated successfully
+	When I create language record with invalid '<Language>' and '<Level>'
+	Then the language record with invalid '<Language>' should not be created
+	Examples: 
+	| Language | Level  |
+	| 123@abc  | Fluent |
+
+	Scenario Outline: Create Duplicate language and level record
+	Given I login to Project Mars
+	When I navigate to language
+	When I create a duplicate '<Language>' and '<Level>' record
+	Then I should see error message for duplicate '<Language>'
 	Examples:
-	| Language | Level            |
-	| Spanish  | Fluent           |
-	| Python   | Basic            |
-	| Marathi  | Native/Bilingual |
-	| Hindi    | Fluent           |
+	| Language | Level |
+	| English  | Basic |
+	| English  | Basic |
+
+	
+	

@@ -53,40 +53,9 @@ namespace Project_Mars.Pages
             return newSkillLevel.Text;
         }
 
-        public void CreateSkillLevelRecord(IWebDriver driver, string skill, string level)
-        {
-            IWebElement aaddNewButton = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[3]/div/div[2]/div/table/thead/tr/th[3]/div"));
-            aaddNewButton.Click();
-
-            IWebElement addSkillTextbox = driver.FindElement(By.XPath("//input[@placeholder='Add Skill']"));
-            addSkillTextbox.SendKeys(skill);
-
-            IWebElement chooseSkillLevelDropdown = driver.FindElement(By.XPath("//select[@name='level']"));
-            chooseSkillLevelDropdown.SendKeys(level);
-            
-
-            IWebElement adddButton = driver.FindElement(By.XPath("//input[@value='Add']"));
-            adddButton.Click();
-            Thread.Sleep(2000);
-        }
-        public string Skill(IWebDriver driver)
-        {
-            IWebElement newSkill = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[3]/div/div[2]/div/table/tbody[last()]/tr/td[1]"));
-            return newSkill.Text;
-        }
-
-        public string Level(IWebDriver driver)
-        {
-            IWebElement newLevel = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[3]/div/div[2]/div/table/tbody[last()]/tr/td[2]"));
-            return newLevel.Text;
-        }
-
-
-
-
         public void EditSkillRecord(IWebDriver driver)
         {
-            IWebElement editButton = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[3]/div/div[2]/div/table/tbody[10]/tr/td[3]/span[1]"));
+            IWebElement editButton = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[3]/div/div[2]/div/table/tbody[last()]/tr/td[3]/span[1]"));
             editButton.Click();
             Thread.Sleep(2000);
 
@@ -122,26 +91,43 @@ namespace Project_Mars.Pages
         public void DeleteSkillRecord(IWebDriver driver)
         {
             Thread.Sleep(2000);
-            IWebElement deleteButton = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[3]/div/div[2]/div/table/tbody[10]/tr/td[3]/span[2]/i"));
+            IWebElement deleteButton = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[3]/div/div[2]/div/table/tbody[last()]/tr/td[3]/span[2]/i"));
             deleteButton.Click();
-            Thread.Sleep(5000);
-
-            //IWebElement skills = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[3]/div/div[2]/div/table/tbody[last()]/tr/td[1]"));
-
-            //if (skills.Text == "Singing")
-            //{
-            //    Assert.Pass("Singing is present!");
-            //}
-            //else
-            //{
-            //    Assert.Fail("Singing is not present!");
-            //}
-
+             
         }
         public string GetDeletedSkill(IWebDriver driver)
         {
             IWebElement deletedSkill = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[3]/div/div[2]/div/table/tbody[last()]/tr/td[1]"));
             return deletedSkill.Text;
         }
+       
+        public void CreateSkillLevelRecord(IWebDriver driver, string skill, string level)
+        {
+            IWebElement aaddNewButton = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[3]/div/div[2]/div/table/thead/tr/th[3]/div"));
+            aaddNewButton.Click();
+
+            IWebElement addSkillTextbox = driver.FindElement(By.XPath("//input[@placeholder='Add Skill']"));
+            addSkillTextbox.SendKeys(skill);
+
+            IWebElement chooseSkillLevelDropdown = driver.FindElement(By.XPath("//select[@name='level']"));
+            chooseSkillLevelDropdown.SendKeys(level);
+
+
+            IWebElement adddButton = driver.FindElement(By.XPath("//input[@value='Add']"));
+            adddButton.Click();
+            Thread.Sleep(2000);
+        }
+        public string Skill(IWebDriver driver)
+        {
+            IWebElement newSkill = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[3]/div/div[2]/div/table/tbody[last()]/tr/td[1]"));
+            return newSkill.Text;
+        }
+
+        public string Level(IWebDriver driver)
+        {
+            IWebElement newLevel = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[3]/div/div[2]/div/table/tbody[last()]/tr/td[2]"));
+            return newLevel.Text;
+        }
+
     }
 }
