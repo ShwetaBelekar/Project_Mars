@@ -195,10 +195,7 @@ this.ScenarioInitialize(scenarioInfo);
  await testRunner.WhenAsync("I navigate to Skill", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
 #line 24
- await testRunner.WhenAsync("I remove the existing skill record", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
-#line hidden
-#line 25
- await testRunner.ThenAsync("the record should not be present on the skill list", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
+ await testRunner.ThenAsync("I remove the existing skill record i should see success message", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
             }
             await this.ScenarioCleanupAsync();
@@ -216,7 +213,7 @@ this.ScenarioInitialize(scenarioInfo);
             argumentsOfScenario.Add("skill", skill);
             argumentsOfScenario.Add("level", level);
             global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Create Skill record", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 27
+#line 26
  this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
@@ -226,16 +223,16 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 await this.ScenarioStartAsync();
-#line 28
+#line 27
  await testRunner.GivenAsync("I logged into Project Mars successfully for Skill management", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
 #line hidden
-#line 29
+#line 28
  await testRunner.WhenAsync("I navigate to Skill", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
-#line 30
+#line 29
  await testRunner.WhenAsync(string.Format("I create \'{0}\' and \'{1}\' record", skill, level), ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
-#line 31
+#line 30
  await testRunner.ThenAsync(string.Format("the record for \'{0}\' and \'{1}\' should be created successfully", skill, level), ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
             }

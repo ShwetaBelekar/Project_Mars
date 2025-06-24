@@ -16,12 +16,12 @@ Scenario Outline: Create valid language and level record
 	| German   | Native/Bilingual |
 	| Java     | Basic            |
 	| C#       | Fluent           |
-	| EnGlish  | Conversational   |
+	| English  | Conversational   |
 
 	Scenario Outline: Update valid language and level record
 	Given I login to Project Mars
 	When I navigate to language
-	When I update '<OldLanguage>' and '<OldLevel>' with new '<NewLanguage >' and '<NewLevel>'
+	When I update '<OldLanguage>' and '<OldLevel>' with new '<NewLanguage>' and '<NewLevel>'
 	Then the '<NewLanguage>' and '<NewLevel>' should be updated successfully
 	Examples:
 	| OldLanguage | OldLevel         | NewLanguage | NewLevel            |
@@ -70,21 +70,20 @@ Scenario Outline: Create valid language and level record
 	Scenario Outline: Create language record with invalid data
 	Given I login to Project Mars
 	When I navigate to language
-	When I create language record with invalid '<Language>' and '<Level>'
-	Then the language record with invalid '<Language>' should not be created
+	When I create invalid '<Language>' and valid '<Level>'
+	Then if the system accepts invalid '<Language>' and valid '<Level>' then there is error in the system
 	Examples: 
 	| Language | Level  |
 	| 123@abc  | Fluent |
 
-	Scenario Outline: Create Duplicate language and level record
-	Given I login to Project Mars
-	When I navigate to language
-	When I create a duplicate '<Language>' and '<Level>' record
-	Then I should see error message for duplicate '<Language>'
-	Examples:
-	| Language | Level |
-	| English  | Basic |
-	| English  | Basic |
+	Scenario Outline: Create Duplicate Language
+Given I login to Project Mars
+When I navigate to language
+When I create a language with "<language>" and "<level>"
+And I try to create a language with "<language>" and "<level>" again
+Then I should see an error message "This language is already exist in your language list."
 
-	
+Examples:
+| language | level |
+| English  | Basic |
 	

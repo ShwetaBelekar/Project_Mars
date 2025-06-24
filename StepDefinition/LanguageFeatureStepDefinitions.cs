@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.BiDi.Modules.Log;
@@ -142,58 +143,31 @@ namespace Project_Mars.StepDefinition
                 Assert.Fail("Blank level record is accepted");
             }
         }
-        [When("I create language record with invalid {string} and {string}")]
-        public void WhenICreateLanguageRecordWithInvalidAnd(string Language, string Level)
+
+        [When("I create invalid {string} and valid {string}")]
+        public void WhenICreateInvalidAndValid(string Language, string Level)
         {
             LanguagePage languagePageObj = new LanguagePage();
             languagePageObj.CreateInvalidLanguageRecord(driver, Language, Level);
         }
 
-        [Then("the language record with invalid {string} should not be created")]
-        public void ThenTheLanguageRecordWithInvalidShouldNotBeCreated(string Language)
+        [Then("if the system accepts invalid {string} and valid {string} then there is error in the system")]
+        public void ThenIfTheSystemAcceptsInvalidAndValidThenThereIsErrorInTheSystem(string Langauge, string Level)
         {
             LanguagePage languagePageObj = new LanguagePage();
-            string InvalidData = languagePageObj.InvalidLanguage(driver);
-            if (InvalidData == "Please enter a valid language name")
+            IWebElement language = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/table/tbody[last()]/tr/td[1]"));
+            if (language.Text == "123@abc")
             {
-                Assert.Pass("Invalid language record not accepted");
+                Assert.Pass("Error in the System");
             }
             else
             {
-                Assert.Fail("Invalid language record is accepted");
+                Assert.Fail("No Error in the System");
             }
         }
-        [When("I create a duplicate {string} and {string} record")]
-        public void WhenICreateADuplicateAndRecord(string Language, string Level)
-        {
-            LanguagePage languagePageObj = new LanguagePage();
-            languagePageObj.CreateLanguageRecord(driver, Language, Level);
-        }
 
-        [Then("I should see error message for duplicate {string}")]
-        public void ThenIShouldSeeErrorMessageForDuplicate(string Language)
-        {
-            LanguagePage languagePageObj = new LanguagePage();
-            string ExceptionMessage = languagePageObj.DuplicateLanguage(driver);
-
-            Console.WriteLine(ExceptionMessage);
-
-            if (ExceptionMessage.Contains("No such element"))
-            {
-                driver.Quit();
-            }
-
-            else if (ExceptionMessage == "This language is already exist in your language list")
-            {
-                Assert.Pass("Duplicate language record not accepted");
-
-            }
-            else
-            {
-                Assert.Fail("Duplicate language record is accepted");
-            }
-
-        }
+        
+        
         [When("I update {string} and {string} with new {string} and {string}")]
         public void WhenIUpdateAndWithNewAnd(string OldLanguage, string OldLevel, string NewLanguage, string NewLevel)
         {
@@ -211,6 +185,54 @@ namespace Project_Mars.StepDefinition
             Assert.That(editedLanguage == NewLanguage, "Expected edited language and actual edited language do not match");
             Assert.That(editedLevel == NewLevel, "Expected edited level and actual edited level do not match");
         }
+
+
+
+        [When("I create a language with {string} and {string}")]
+        public void WhenICreateALanguageWithAnd(string language, string level)
+        {
+            LanguagePage languagePageObj = new LanguagePage();
+            languagePageObj.CreateLanguageLevelRecord(driver, language, level);
+        }
+
+        [When("I try to create a language with {string} and {string} again")]
+        public void WhenITryToCreateALanguageWithAndAgain(string language, string level)
+        {
+            LanguagePage languagePageObj = new LanguagePage();
+            languagePageObj.CreateLanguageLevelRecord(driver, language, level);
+        }
+
+        [Then("I should see an error message {string}")]
+        public void ThenIShouldSeeAnErrorMessage(string Thislanguageisalreadyexistinyourlanguagelist)
+        {
+            LanguagePage languagePageObj = new LanguagePage();
+           
+            IWebElement popupAlert = driver.FindElement(By.XPath("//div[contains(@class, 'ns-box') and contains(@class, 'ns-type-error')]"));
+            if (popupAlert.Text == "This language is already exist in your language list")
+            {
+                Assert.Pass("Duplicate language record not accepted");
+
+            }
+            else
+            {
+                Assert.Fail("Duplicate language record is accepted");
+            }
+        }
+
+
+       
+
+
+       
+
+
+       
+        
+
+
+
+
+
 
 
 

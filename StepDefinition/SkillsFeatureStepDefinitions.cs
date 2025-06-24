@@ -6,6 +6,7 @@ using OpenQA.Selenium.Chrome;
 using Project_Mars.Pages;
 using Project_Mars.Utilities;
 using Reqnroll;
+using Turnupportal2025.Utilities;
 
 namespace Project_Mars.StepDefinition
 {
@@ -63,31 +64,24 @@ namespace Project_Mars.StepDefinition
             string editedSkillLevel = skillsPageObj.GetEditedSkillLevel(driver);
             Assert.That(editedSkillLevel == "Intermediate", "Expected edited skill level and actual edited skill level do not match.");
         }
-
-        [When("I remove the existing skill record")]
-        public void WhenIRemoveTheExistingSkillRecord()
+        [Then("I remove the existing skill record i should see success message")]
+        public void ThenIRemoveTheExistingSkillRecordIShouldSeeSuccessMessage()
         {
             SkillsPage skillsPageObj = new SkillsPage();
             skillsPageObj.DeleteSkillRecord(driver);
-        }
-
-        [Then("the record should not be present on the skill list")]
-        public void ThenTheRecordShouldNotBePresentOnTheSkillList()
-        {
-            SkillsPage skillsPageObj = new SkillsPage();
-            IWebElement skills = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[3]/div/div[2]/div/table/tbody[last()]/tr/td[1]"));
-
-            if (skills.Text == "Singing")
+           
+            IWebElement popupAlert = driver.FindElement(By.XPath("//div[@class='ns-box ns-growl ns-effect-jelly ns-type-success ns-show']"));
+            if (popupAlert.Text == "Singing has been deleted")
             {
-                Assert.Pass("Singing is present!");
+                Assert.Pass("Record Deleted Succesfully");
             }
             else
             {
-                Assert.Fail("Singing is not present!");
+                Assert.Fail("Record not deleted");
             }
-
-
         }
+
+
         [When("I create {string} and {string} record")]
         public void WhenICreateAndRecord(string skill, string level)
         {

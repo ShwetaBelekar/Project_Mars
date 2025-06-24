@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Turnupportal2025.Utilities;
 
 namespace Project_Mars.Pages
 {
@@ -90,16 +91,22 @@ namespace Project_Mars.Pages
 
         public void DeleteSkillRecord(IWebDriver driver)
         {
-            Thread.Sleep(2000);
+            
             IWebElement deleteButton = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[3]/div/div[2]/div/table/tbody[last()]/tr/td[3]/span[2]/i"));
             deleteButton.Click();
-             
+            Wait.WaitToBeClickable(driver, "XPath", "//div[@class='ns-box ns-growl ns-effect-jelly ns-type-success ns-show']", 2);
+            IWebElement popupAlert = driver.FindElement(By.XPath("//div[contains(@class, 'ns-box') and contains(@class, 'ns-growl') and contains(@class, 'ns-type-success')]"));
+            if (popupAlert.Text == "Singing has been deleted")
+            {
+                Assert.Pass("Record Deleted Succesfully");
+            }
+            else
+            {
+                Assert.Fail("Record not deleted");
+            }
+
         }
-        public string GetDeletedSkill(IWebDriver driver)
-        {
-            IWebElement deletedSkill = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[3]/div/div[2]/div/table/tbody[last()]/tr/td[1]"));
-            return deletedSkill.Text;
-        }
+       
        
         public void CreateSkillLevelRecord(IWebDriver driver, string skill, string level)
         {

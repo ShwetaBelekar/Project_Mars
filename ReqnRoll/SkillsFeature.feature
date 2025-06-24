@@ -21,8 +21,7 @@ Scenario: create skill record with valid data
 	Scenario: remove existing skill record with valid data
 	Given I logged into Project Mars successfully for Skill management
 	When  I navigate to Skill
-	When I remove the existing skill record
-	Then the record should not be present on the skill list
+	Then I remove the existing skill record i should see success message
 
 	Scenario Outline: Create Skill record
 	Given I logged into Project Mars successfully for Skill management
