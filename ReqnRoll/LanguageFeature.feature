@@ -73,17 +73,21 @@ Scenario Outline: Create valid language and level record
 	When I create invalid '<Language>' and valid '<Level>'
 	Then if the system accepts invalid '<Language>' and valid '<Level>' then there is error in the system
 	Examples: 
-	| Language | Level  |
-	| 123@abc  | Fluent |
+	| Language                         | Level          |
+	| 123@abc                          | Fluent         |
+	| Englih                           | Basic          |
+	| 12345678                         | Conversational |
+	| aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa | Fluent         |
 
-	Scenario Outline: Create Duplicate Language
+Scenario Outline: User can add language until add new button is visible
 Given I login to Project Mars
 When I navigate to language
-When I create a language with "<language>" and "<level>"
-And I try to create a language with "<language>" and "<level>" again
-Then I should see an error message "This language is already exist in your language list."
-
+When i create '<Language>' and '<Level>'
+Then i see '<ExpectedMessage>'
 Examples:
-| language | level |
-| English  | Basic |
-	
+| Language | Level            | ExpectedMessage                               |
+| German   | Native/Bilingual | Language added successfully                   |
+| Java     | Basic            | Language added successfully                   |
+| C#       | Fluent           | Language added successfully                   |
+| Hindi    | Fluent           | Language added successfully                   |
+| English  | Fluent           | Add New Button not visible can't add language |

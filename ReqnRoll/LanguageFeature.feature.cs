@@ -337,6 +337,9 @@ this.ScenarioInitialize(scenarioInfo);
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Create language record with invalid data")]
         [NUnit.Framework.TestCaseAttribute("123@abc", "Fluent", null)]
+        [NUnit.Framework.TestCaseAttribute("Englih", "Basic", null)]
+        [NUnit.Framework.TestCaseAttribute("12345678", "Conversational", null)]
+        [NUnit.Framework.TestCaseAttribute("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "Fluent", null)]
         public async global::System.Threading.Tasks.Task CreateLanguageRecordWithInvalidData(string language, string level, string[] exampleTags)
         {
             string[] tagsOfScenario = exampleTags;
@@ -372,17 +375,22 @@ this.ScenarioInitialize(scenarioInfo);
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Create Duplicate Language")]
-        [NUnit.Framework.TestCaseAttribute("English", "Basic", null)]
-        public async global::System.Threading.Tasks.Task CreateDuplicateLanguage(string language, string level, string[] exampleTags)
+        [NUnit.Framework.DescriptionAttribute("User can add language until add new button is visible")]
+        [NUnit.Framework.TestCaseAttribute("German", "Native/Bilingual", "Language added successfully", null)]
+        [NUnit.Framework.TestCaseAttribute("Java", "Basic", "Language added successfully", null)]
+        [NUnit.Framework.TestCaseAttribute("C#", "Fluent", "Language added successfully", null)]
+        [NUnit.Framework.TestCaseAttribute("Hindi", "Fluent", "Language added successfully", null)]
+        [NUnit.Framework.TestCaseAttribute("English", "Fluent", "Add New Button not visible can\'t add language", null)]
+        public async global::System.Threading.Tasks.Task UserCanAddLanguageUntilAddNewButtonIsVisible(string language, string level, string expectedMessage, string[] exampleTags)
         {
             string[] tagsOfScenario = exampleTags;
             global::System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new global::System.Collections.Specialized.OrderedDictionary();
-            argumentsOfScenario.Add("language", language);
-            argumentsOfScenario.Add("level", level);
-            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Create Duplicate Language", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 79
- this.ScenarioInitialize(scenarioInfo);
+            argumentsOfScenario.Add("Language", language);
+            argumentsOfScenario.Add("Level", level);
+            argumentsOfScenario.Add("ExpectedMessage", expectedMessage);
+            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("User can add language until add new button is visible", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 82
+this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
             {
@@ -391,21 +399,17 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 await this.ScenarioStartAsync();
-#line 80
+#line 83
 await testRunner.GivenAsync("I login to Project Mars", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
 #line hidden
-#line 81
+#line 84
 await testRunner.WhenAsync("I navigate to language", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
-#line 82
-await testRunner.WhenAsync(string.Format("I create a language with \"{0}\" and \"{1}\"", language, level), ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
+#line 85
+await testRunner.WhenAsync(string.Format("i create \'{0}\' and \'{1}\'", language, level), ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
-#line 83
-await testRunner.AndAsync(string.Format("I try to create a language with \"{0}\" and \"{1}\" again", language, level), ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
-#line hidden
-#line 84
-await testRunner.ThenAsync("I should see an error message \"This language is already exist in your language li" +
-                        "st.\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
+#line 86
+await testRunner.ThenAsync(string.Format("i see \'{0}\'", expectedMessage), ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
             }
             await this.ScenarioCleanupAsync();

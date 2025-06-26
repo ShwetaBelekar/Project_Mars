@@ -163,8 +163,8 @@ namespace Project_Mars.Pages
             Thread.Sleep(5000);
         }
 
-        
-        
+      
+
 
         public void OldLanguageRecord(IWebDriver driver, string OldLanguage, string OldLevel)
         {
@@ -258,8 +258,5 @@ namespace Project_Mars.Pages
         }
 
       
-
-            
-
     }
 }
