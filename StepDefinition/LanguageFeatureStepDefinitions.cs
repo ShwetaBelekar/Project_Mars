@@ -4,6 +4,7 @@ using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.BiDi.Modules.Log;
 using OpenQA.Selenium.Chrome;
+using Project_Mars.Hooks;
 using Project_Mars.Pages;
 using Project_Mars.Utilities;
 using Reqnroll;
@@ -13,12 +14,17 @@ using Turnupportal2025.Utilities;
 namespace Project_Mars.StepDefinition
 {
     [Binding]
-    public class LanguageFeatureStepDefinitions : CommonDriver
+    public sealed class LanguageFeatureStepDefinitions
     {
+        private IWebDriver driver;
+        public LanguageFeatureStepDefinitions(IWebDriver driver)
+        {
+            this.driver = driver;
+        }
         [Given("I login to Project Mars")]
         public void GivenILoginToProjectMars()
         {
-            driver = new ChromeDriver();
+            //driver = new ChromeDriver();
 
             LoginPage loginPageObj = new LoginPage();
             loginPageObj.LoginActions(driver);
@@ -188,25 +194,39 @@ namespace Project_Mars.StepDefinition
             Assert.That(editedLevel == NewLevel, "Expected edited level and actual edited level do not match");
         }
 
-        [When("i create {string} and {string}")]
-        public void WhenICreateAnd(string Language, string Level)
+        [Then("After creating four {string} with {string} successfully addnew button should not visible restricting user to add language")]
+        public void ThenAfterCreatingFourWithSuccessfullyAddnewButtonShouldNotVisibleRestrictingUserToAddLanguage(string Language, string Level)
         {
             LanguagePage languagePageObj = new LanguagePage();
             languagePageObj.CreateLanguageRecord(driver, Language, Level);
+            IWebElement newLanguage = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/table/tbody[last()]/tr/td[1]"));
+            IWebElement newLevel = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/table/tbody[last()]/tr/td[2]"));
+
+            if (newLanguage.Text == Language && newLevel.Text == Level)
+            {
+                Assert.Pass("record created successfully");
+            }
+            else
+            {
+                Assert.Fail("record creation unsuccessful");
+            }
+
+            
         }
 
-        [Then("i see {string}")]
-        public void ThenISee(string ExpectedMessage)
-        {
 
-        }
-
-
-
-
+      
 
 
         
+
+
+
+
+
+
+
+
 
 
 

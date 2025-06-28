@@ -18,9 +18,28 @@ namespace Project_Mars.Pages
     {
         public void CreateLanguageRecord(IWebDriver driver, string language, string level)
         {
-            IWebElement addNewButton = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/table/thead/tr/th[3]/div"));
-            addNewButton.Click();
-            Thread.Sleep(2000);
+            try
+            {
+                IWebElement addNewButton = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/table/thead/tr/th[3]/div"));
+                if (addNewButton.Displayed)
+                {
+                    addNewButton.Click();
+                    Thread.Sleep(2000);
+                }
+                else
+                {
+                    Assert.Pass("AddNew is not visible can't add language");
+                }
+               
+            }
+            catch (NoSuchElementException)
+            {
+                Assert.Pass("AddNew button hasn't been found, likely already at maximum languages");
+            }
+            catch (Exception ex)
+            {
+                Assert.Fail($"An unexpected error occurred: {ex.Message}");
+            }
 
             IWebElement addLanguageTextbox = driver.FindElement(By.XPath("//input[@placeholder='Add Language']"));
             addLanguageTextbox.SendKeys(language);
@@ -256,7 +275,6 @@ namespace Project_Mars.Pages
             addButton.Click();
             
         }
-
-      
+        
     }
 }

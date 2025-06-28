@@ -79,15 +79,15 @@ Scenario Outline: Create valid language and level record
 	| 12345678                         | Conversational |
 	| aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa | Fluent         |
 
-Scenario Outline: User can add language until add new button is visible
-Given I login to Project Mars
-When I navigate to language
-When i create '<Language>' and '<Level>'
-Then i see '<ExpectedMessage>'
-Examples:
-| Language | Level            | ExpectedMessage                               |
-| German   | Native/Bilingual | Language added successfully                   |
-| Java     | Basic            | Language added successfully                   |
-| C#       | Fluent           | Language added successfully                   |
-| Hindi    | Fluent           | Language added successfully                   |
-| English  | Fluent           | Add New Button not visible can't add language |
+	Scenario Outline: Check if user can add more than four language
+	Given I login to Project Mars
+	When I navigate to language
+	Then After creating four '<Language>' with '<Level>' successfully addnew button should not visible restricting user to add language
+	
+	Examples:
+	| Language | Level            |
+	| Spanish  | Conversational   |
+	| Python   | Basic            |
+	| Marathi  | Native/Bilingual |
+	| Hindi    | Fluent           |
+	| English  | Basic            |

@@ -375,22 +375,21 @@ this.ScenarioInitialize(scenarioInfo);
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("User can add language until add new button is visible")]
-        [NUnit.Framework.TestCaseAttribute("German", "Native/Bilingual", "Language added successfully", null)]
-        [NUnit.Framework.TestCaseAttribute("Java", "Basic", "Language added successfully", null)]
-        [NUnit.Framework.TestCaseAttribute("C#", "Fluent", "Language added successfully", null)]
-        [NUnit.Framework.TestCaseAttribute("Hindi", "Fluent", "Language added successfully", null)]
-        [NUnit.Framework.TestCaseAttribute("English", "Fluent", "Add New Button not visible can\'t add language", null)]
-        public async global::System.Threading.Tasks.Task UserCanAddLanguageUntilAddNewButtonIsVisible(string language, string level, string expectedMessage, string[] exampleTags)
+        [NUnit.Framework.DescriptionAttribute("Check if user can add more than four language")]
+        [NUnit.Framework.TestCaseAttribute("Spanish", "Conversational", null)]
+        [NUnit.Framework.TestCaseAttribute("Python", "Basic", null)]
+        [NUnit.Framework.TestCaseAttribute("Marathi", "Native/Bilingual", null)]
+        [NUnit.Framework.TestCaseAttribute("Hindi", "Fluent", null)]
+        [NUnit.Framework.TestCaseAttribute("English", "Basic", null)]
+        public async global::System.Threading.Tasks.Task CheckIfUserCanAddMoreThanFourLanguage(string language, string level, string[] exampleTags)
         {
             string[] tagsOfScenario = exampleTags;
             global::System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new global::System.Collections.Specialized.OrderedDictionary();
             argumentsOfScenario.Add("Language", language);
             argumentsOfScenario.Add("Level", level);
-            argumentsOfScenario.Add("ExpectedMessage", expectedMessage);
-            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("User can add language until add new button is visible", null, tagsOfScenario, argumentsOfScenario, featureTags);
+            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Check if user can add more than four language", null, tagsOfScenario, argumentsOfScenario, featureTags);
 #line 82
-this.ScenarioInitialize(scenarioInfo);
+ this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
             {
@@ -400,16 +399,14 @@ this.ScenarioInitialize(scenarioInfo);
             {
                 await this.ScenarioStartAsync();
 #line 83
-await testRunner.GivenAsync("I login to Project Mars", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
+ await testRunner.GivenAsync("I login to Project Mars", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
 #line hidden
 #line 84
-await testRunner.WhenAsync("I navigate to language", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
+ await testRunner.WhenAsync("I navigate to language", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
 #line 85
-await testRunner.WhenAsync(string.Format("i create \'{0}\' and \'{1}\'", language, level), ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
-#line hidden
-#line 86
-await testRunner.ThenAsync(string.Format("i see \'{0}\'", expectedMessage), ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
+ await testRunner.ThenAsync(string.Format("After creating four \'{0}\' with \'{1}\' successfully addnew button should not visibl" +
+                            "e restricting user to add language", language, level), ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
             }
             await this.ScenarioCleanupAsync();
