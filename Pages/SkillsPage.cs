@@ -1,5 +1,7 @@
 ﻿using NUnit.Framework;
 using OpenQA.Selenium;
+using OpenQA.Selenium.BiDi.Modules.Log;
+using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -94,20 +96,19 @@ namespace Project_Mars.Pages
             
             IWebElement deleteButton = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[3]/div/div[2]/div/table/tbody[last()]/tr/td[3]/span[2]/i"));
             deleteButton.Click();
-            Wait.WaitToBeClickable(driver, "XPath", "//div[@class='ns-box ns-growl ns-effect-jelly ns-type-success ns-show']", 2);
-            IWebElement popupAlert = driver.FindElement(By.XPath("//div[contains(@class, 'ns-box') and contains(@class, 'ns-growl') and contains(@class, 'ns-type-success')]"));
-            if (popupAlert.Text == "Singing has been deleted")
-            {
-                Assert.Pass("Record Deleted Succesfully");
-            }
-            else
-            {
-                Assert.Fail("Record not deleted");
-            }
+            //Wait.WaitToBeClickable(driver, "XPath", "//div[@class='ns-box ns-growl ns-effect-jelly ns-type-success ns-show']", 2);
+            //IWebElement popupAlert = driver.FindElement(By.XPath("//div[contains(@class, 'ns-box') and contains(@class, 'ns-growl') and contains(@class, 'ns-type-success')]"));
+            //if (popupAlert.Text == "Singing has been deleted")
+            //{
+            //    Assert.Pass("Record Deleted Succesfully");
+            //}
+            //else
+            //{
+            //    Assert.Fail("Record not deleted");
+            //}
 
         }
-       
-       
+
         public void CreateSkillLevelRecord(IWebDriver driver, string skill, string level)
         {
             IWebElement aaddNewButton = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[3]/div/div[2]/div/table/thead/tr/th[3]/div"));
@@ -118,23 +119,37 @@ namespace Project_Mars.Pages
 
             IWebElement chooseSkillLevelDropdown = driver.FindElement(By.XPath("//select[@name='level']"));
             chooseSkillLevelDropdown.SendKeys(level);
+            Thread.Sleep(2000);
 
 
             IWebElement adddButton = driver.FindElement(By.XPath("//input[@value='Add']"));
             adddButton.Click();
             Thread.Sleep(2000);
-        }
-        public string Skill(IWebDriver driver)
-        {
-            IWebElement newSkill = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[3]/div/div[2]/div/table/tbody[last()]/tr/td[1]"));
-            return newSkill.Text;
+
+            //IWebElement newSkill = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[3]/div/div[2]/div/table/tbody[last()]/tr/td[1]"));
+
+            //if (newSkill.Text == "Singing")
+            //{
+            //    Assert.Pass("Singing skill is created successfully!");
+            //}
+            //else
+            //{
+            //    Assert.Fail("Singing skill is not created successfully!");
+            //}
+
         }
 
-        public string Level(IWebDriver driver)
+        public string BlankSkill(IWebDriver driver)
         {
-            IWebElement newLevel = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[3]/div/div[2]/div/table/tbody[last()]/tr/td[2]"));
-            return newLevel.Text;
+            IWebElement popupAlert = driver.FindElement(By.XPath("//div[@class='ns-box ns-growl ns-effect-jelly ns-type-error ns-show']"));
+            return popupAlert.Text;
         }
 
+        public string BlankLevel(IWebDriver driver)
+        {
+            IWebElement popupAlert = driver.FindElement(By.XPath("//div[@class='ns-box ns-growl ns-effect-jelly ns-type-error ns-show']"));
+            return popupAlert.Text;
+        }
+        
     }
 }

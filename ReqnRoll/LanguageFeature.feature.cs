@@ -253,10 +253,10 @@ this.ScenarioInitialize(scenarioInfo);
  await testRunner.WhenAsync("I navigate to language", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
 #line 48
- await testRunner.WhenAsync("I remove the existing language and level record", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
+ await testRunner.WhenAsync("I delete the existing language record", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
 #line 49
- await testRunner.ThenAsync("the record should not be present", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
+ await testRunner.ThenAsync("i should see message that record deleted successfully", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
             }
             await this.ScenarioCleanupAsync();
@@ -272,7 +272,7 @@ this.ScenarioInitialize(scenarioInfo);
             argumentsOfScenario.Add("Language", language);
             argumentsOfScenario.Add("Level", level);
             global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Create blank language and valid level record", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 52
+#line 54
  this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
@@ -282,16 +282,16 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 await this.ScenarioStartAsync();
-#line 53
+#line 55
  await testRunner.GivenAsync("I login to Project Mars", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
 #line hidden
-#line 54
+#line 56
  await testRunner.WhenAsync("I navigate to language", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
-#line 55
+#line 57
  await testRunner.WhenAsync(string.Format("I create blank \'{0}\' and valid \'{1}\' record", language, level), ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
-#line 56
+#line 58
  await testRunner.ThenAsync(string.Format("I should see error message for blank \'{0}\' name", language), ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
             }
@@ -308,7 +308,7 @@ this.ScenarioInitialize(scenarioInfo);
             argumentsOfScenario.Add("Language", language);
             argumentsOfScenario.Add("Level", level);
             global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Create valid language and blank level record", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 61
+#line 63
  this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
@@ -318,16 +318,16 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 await this.ScenarioStartAsync();
-#line 62
+#line 64
  await testRunner.GivenAsync("I login to Project Mars", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
 #line hidden
-#line 63
+#line 65
  await testRunner.WhenAsync("I navigate to language", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
-#line 64
+#line 66
  await testRunner.WhenAsync(string.Format("I create valid \'{0}\' and blank \'{1}\' record", language, level), ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
-#line 65
+#line 67
  await testRunner.ThenAsync(string.Format("I should see error message for blank \'{0}\'", level), ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
             }
@@ -347,7 +347,7 @@ this.ScenarioInitialize(scenarioInfo);
             argumentsOfScenario.Add("Language", language);
             argumentsOfScenario.Add("Level", level);
             global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Create language record with invalid data", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 70
+#line 72
  this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
@@ -357,16 +357,16 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 await this.ScenarioStartAsync();
-#line 71
+#line 73
  await testRunner.GivenAsync("I login to Project Mars", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
 #line hidden
-#line 72
+#line 74
  await testRunner.WhenAsync("I navigate to language", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
-#line 73
+#line 75
  await testRunner.WhenAsync(string.Format("I create invalid \'{0}\' and valid \'{1}\'", language, level), ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
-#line 74
+#line 76
  await testRunner.ThenAsync(string.Format("if the system accepts invalid \'{0}\' and valid \'{1}\' then there is error in the sy" +
                             "stem", language, level), ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
@@ -388,7 +388,7 @@ this.ScenarioInitialize(scenarioInfo);
             argumentsOfScenario.Add("Language", language);
             argumentsOfScenario.Add("Level", level);
             global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Check if user can add more than four language", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 82
+#line 84
  this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
@@ -398,15 +398,56 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 await this.ScenarioStartAsync();
-#line 83
+#line 85
  await testRunner.GivenAsync("I login to Project Mars", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
 #line hidden
-#line 84
+#line 86
  await testRunner.WhenAsync("I navigate to language", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
-#line 85
+#line 87
  await testRunner.ThenAsync(string.Format("After creating four \'{0}\' with \'{1}\' successfully addnew button should not visibl" +
                             "e restricting user to add language", language, level), ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
+#line hidden
+            }
+            await this.ScenarioCleanupAsync();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("check if user can create duplicate record")]
+        [NUnit.Framework.TestCaseAttribute("English", "Fluent", "English", "Fluent", null)]
+        public async global::System.Threading.Tasks.Task CheckIfUserCanCreateDuplicateRecord(string language, string level, string duplicatelanguage, string duplicatelevel, string[] exampleTags)
+        {
+            string[] tagsOfScenario = exampleTags;
+            global::System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new global::System.Collections.Specialized.OrderedDictionary();
+            argumentsOfScenario.Add("Language", language);
+            argumentsOfScenario.Add("Level", level);
+            argumentsOfScenario.Add("duplicatelanguage", duplicatelanguage);
+            argumentsOfScenario.Add("duplicatelevel", duplicatelevel);
+            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("check if user can create duplicate record", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 97
+ this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                await this.ScenarioStartAsync();
+#line 98
+ await testRunner.GivenAsync("I login to Project Mars", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
+#line hidden
+#line 99
+ await testRunner.WhenAsync("I navigate to language", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
+#line hidden
+#line 100
+ await testRunner.WhenAsync(string.Format("i create \'{0}\' with \'{1}\' record successfully", language, level), ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
+#line hidden
+#line 101
+ await testRunner.ThenAsync(string.Format("i create duplicate \'{0}\' with \'{1}\' record", duplicatelanguage, duplicatelevel), ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
+#line hidden
+#line 102
+ await testRunner.ThenAsync("i should see error message for duplicate record", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
             }
             await this.ScenarioCleanupAsync();

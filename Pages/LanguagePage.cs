@@ -103,20 +103,20 @@ namespace Project_Mars.Pages
 
         public void DeleteLanguageRecord(IWebDriver driver)
         {
-            Thread.Sleep(2000);
-            IWebElement deleteButton = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/table/tbody[4]/tr/td[3]/span[2]/i"));
-            deleteButton.Click();
-            driver.Navigate().Refresh();
-            Thread.Sleep(5000);
+            
+            IWebElement deleteButton = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/table/tbody/tr/td[3]/span[2]/i"));
+            deleteButton.Click();  
+            //driver.Navigate().Refresh();
+            //Thread.Sleep(5000);
 
             
         }
-        public string GetDeleteLanguageLevelRecord(IWebDriver driver)
-        {
-            Wait.WaitToBeClickable(driver, "XPath", "//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/table/tbody[last()]/tr/td[1]",3);
-            IWebElement language = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/table/tbody[last()]/tr/td[1]"));
-            return language.Text;
-        }
+        //public string GetDeleteLanguageLevelRecord(IWebDriver driver)
+        //{
+        //    Wait.WaitToBeClickable(driver, "XPath", "//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/table/tbody[last()]/tr/td[1]",3);
+        //    IWebElement language = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/table/tbody[last()]/tr/td[1]"));
+        //    return language.Text;
+        //}
 
 
         public void CreateBlankLanguageRecord(IWebDriver driver, string language, string level)
@@ -256,19 +256,19 @@ namespace Project_Mars.Pages
             Thread.Sleep(7000);
         }
 
-        public void DuplicateLanguageRecord(IWebDriver driver, string Language, string Level)
+        public void DuplicateLanguageRecord(IWebDriver driver, string duplicatelanguage, string duplicatelevel)
         {
-           
+            Thread.Sleep(5000);
             IWebElement addNewButton = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/table/thead/tr/th[3]/div"));
             addNewButton.Click();
             
 
             IWebElement addLanguageTextbox = driver.FindElement(By.XPath("//input[@placeholder='Add Language']"));
-            addLanguageTextbox.SendKeys(Language);
+            addLanguageTextbox.SendKeys(duplicatelanguage);
 
             IWebElement chooseLanguageLevelDropDown = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/div/div[2]/select"));
             SelectElement selectLevel = new SelectElement(chooseLanguageLevelDropDown);
-            selectLevel.SelectByText(Level);
+            selectLevel.SelectByText(duplicatelevel);
 
 
             IWebElement addButton = driver.FindElement(By.XPath("//input[@value='Add']"));

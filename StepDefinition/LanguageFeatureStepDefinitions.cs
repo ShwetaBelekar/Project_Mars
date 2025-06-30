@@ -80,31 +80,32 @@ namespace Project_Mars.StepDefinition
             Assert.That(editedLanguage == Language, "Expected edited language and actual edited language do not match");
             Assert.That(editedLevel == Level, "Expected edited level and actual edited level do not match");
         }
-        [When("I remove the existing language and level record")]
-        public void WhenIRemoveTheExistingLanguageAndLevelRecord()
+
+        [When("I delete the existing language record")]
+        public void WhenIDeleteTheExistingLanguageRecord()
         {
             LanguagePage languagePageObj = new LanguagePage();
             languagePageObj.DeleteLanguageRecord(driver);
         }
 
-        [Then("the record should not be present")]
-        public void ThenTheRecordShouldNotBePresent()
+        [Then("i should see message that record deleted successfully")]
+        public void ThenIShouldSeeMessageThatRecordDeletedSuccessfully()
         {
             LanguagePage languagePageObj = new LanguagePage();
-
-            IWebElement language = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/table/tbody[last()]/tr/td[1]"));
-            
-            if (language.Text == "English")
+            Wait.WaitToBeClickable(driver, "XPath", "//div[@class='ns-box ns-growl ns-effect-jelly ns-type-success ns-show']", 2);
+            IWebElement popupAlert = driver.FindElement(By.XPath("//div[@class='ns-box ns-growl ns-effect-jelly ns-type-success ns-show']"));
+            if (popupAlert.Text == "English has been deleted from your languages")
             {
-                Assert.Pass("English is not present");
+                Assert.Pass("Record Deleted Succesfully");
             }
             else
             {
-                Assert.Fail("English is Present");
+                Assert.Fail("Record not deleted");
             }
         }
 
-        [When("I create blank {string} and valid {string} record")]
+
+            [When("I create blank {string} and valid {string} record")]
         public void WhenICreateBlankAndValidRecord(string Language, string Level)
         {
             LanguagePage languagePageObj = new LanguagePage();
@@ -213,12 +214,50 @@ namespace Project_Mars.StepDefinition
 
             
         }
+        [When("i create {string} with {string} record successfully")]
+        public void WhenICreateWithRecordSuccessfully(string Language, string Level)
+        {
+            LanguagePage languagePageObj = new LanguagePage();
+            languagePageObj.CreateLanguageRecord(driver, Language, Level);
+            IWebElement newLanguage = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/table/tbody[last()]/tr/td[1]"));
+            if(newLanguage.Text == "English")
+            {
+                Console.WriteLine("Record created successfully");
+            }
+            else
+            {
+                Console.WriteLine("Record creation unsuccessful");
+            }
+        }
+
+        [Then("i create duplicate {string} with {string} record")]
+        public void ThenICreateDuplicateWithRecord(string duplicatelanguage, string duplicatelevel)
+        {
+            LanguagePage languagePageObj = new LanguagePage();
+            languagePageObj.DuplicateLanguageRecord(driver, duplicatelanguage, duplicatelevel);
+        }
+
+        [Then("i should see error message for duplicate record")]
+        public void ThenIShouldSeeErrorMessageForDuplicateRecord()
+        {
+            Wait.WaitToBeClickable(driver, "XPath", "//div[contains(@class, 'ns-type-error') and contains(@class, 'ns-show')]", 1);
+            IWebElement popupAlert = driver.FindElement(By.XPath("//div[contains(@class, 'ns-type-error') and contains(@class, 'ns-show')]"));
+            if (popupAlert.Text == "This language is already exist in your language list.")
+            {
+                Assert.Pass("Duplicate record not accepted");
+            }
+            else
+            {
+                Assert.Fail("Duplicate record accepted");
+            }
+        }
 
 
-      
 
 
-        
+
+
+
 
 
 

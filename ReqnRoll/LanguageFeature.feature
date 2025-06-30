@@ -45,8 +45,10 @@ Scenario Outline: Create valid language and level record
 	Scenario: remove existing language and level record
 	Given I login to Project Mars 
 	When  I navigate to language
-	When I remove the existing language and level record
-	Then the record should not be present
+	When I delete the existing language record
+	Then i should see message that record deleted successfully
+	
+	
 	
 
 	Scenario Outline: Create blank language and valid level record
@@ -91,3 +93,14 @@ Scenario Outline: Create valid language and level record
 	| Marathi  | Native/Bilingual |
 	| Hindi    | Fluent           |
 	| English  | Basic            |
+
+	Scenario Outline: check if user can create duplicate record
+	Given I login to Project Mars
+	When I navigate to language
+	When i create '<Language>' with '<Level>' record successfully
+	Then i create duplicate '<duplicatelanguage>' with '<duplicatelevel>' record
+	Then i should see error message for duplicate record
+	
+	Examples: 
+	| Language | Level  | duplicatelanguage | duplicatelevel |
+	| English  | Fluent | English           | Fluent         |
