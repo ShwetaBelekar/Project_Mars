@@ -4,7 +4,7 @@ using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.BiDi.Modules.Log;
 using OpenQA.Selenium.Chrome;
-using Project_Mars.Hooks;
+
 using Project_Mars.Pages;
 using Project_Mars.Utilities;
 using Reqnroll;
