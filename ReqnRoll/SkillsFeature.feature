@@ -1,4 +1,5 @@
-﻿Feature: SkillsFeature
+﻿@skill
+Feature: Skill
 As a Project_Mars user
 I would like to create, edit and delete Skill records
 So that I can manage Skill successfully

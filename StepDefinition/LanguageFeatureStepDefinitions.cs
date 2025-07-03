@@ -4,17 +4,18 @@ using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.BiDi.Modules.Log;
 using OpenQA.Selenium.Chrome;
-
+using Project_Mars.Hooks;
 using Project_Mars.Pages;
 using Project_Mars.Utilities;
 using Reqnroll;
+using Reqnroll.BoDi;
 using SeleniumExtras.WaitHelpers;
 using Turnupportal2025.Utilities;
 
 namespace Project_Mars.StepDefinition
 {
     [Binding]
-    public sealed class LanguageFeatureStepDefinitions
+    public sealed class LanguageFeatureStepDefinitions 
     {
         private IWebDriver driver;
         public LanguageFeatureStepDefinitions(IWebDriver driver)

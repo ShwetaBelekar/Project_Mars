@@ -32,7 +32,7 @@ namespace Project_Mars.Hooks
         }
 
 
-        [AfterScenario]
+        [AfterScenario()]
         public void CleanUp()
         {
             var driver = _container.Resolve<IWebDriver>();
@@ -42,23 +42,25 @@ namespace Project_Mars.Hooks
             }
 
         }
-        [BeforeFeature]
+        [BeforeFeature()]
         public static void BeforeFeature() 
         {
             //IWebDriver driver = new ChromeDriver();
 
             
         }
-        [AfterFeature]
-        public static void AfterFeature()
+        [AfterFeature()]
+        public static void AfterFeature(FeatureContext featureContext)
         {
             IWebDriver driver = new ChromeDriver();
-            if (driver != null)
+            LoginPage loginPageObj = new LoginPage();
+            loginPageObj.LoginActions(driver);
+
+            if (featureContext.FeatureInfo.Tags.Contains("language"))
             {
                 try
                 {
-                    LoginPage loginPageObj = new LoginPage();
-                    loginPageObj.LoginActions(driver);
+                    
                     HomeToLanguagePage homeToLanguagePageObj = new HomeToLanguagePage();
                     homeToLanguagePageObj.NavigateToLanguage(driver);
                     
@@ -77,6 +79,31 @@ namespace Project_Mars.Hooks
                 {
                     driver.Quit();
                 }
+            }
+            else if (featureContext.FeatureInfo.Tags.Contains("skill"))
+            {
+                try
+                {
+                   
+                    HomeToSkillsPage homeToSkillsPageObj = new HomeToSkillsPage();
+                    homeToSkillsPageObj.NavigateToSkills(driver);
+
+                    // Delete languages logic here
+                    var deleteButtons = driver.FindElements(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[3]/div/div[2]/div/table/tbody/tr/td[3]/span[2]/i"));
+                    for (int i = deleteButtons.Count - 1; i >= 0; i--)
+                    {
+                        deleteButtons[i].Click();
+                    }
+                }
+                catch(Exception ex)
+                {
+                    Console.WriteLine($"Error during cleanup: {ex.Message}");
+                }
+                finally
+                {
+                    driver.Quit();
+                }
+
             }
         }
         
