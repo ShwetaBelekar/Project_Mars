@@ -63,23 +63,36 @@ namespace Project_Mars.StepDefinition
                 Assert.Fail("record creation unsuccessful");
             }
         }
-        
-        [When("I edit existing {string} and {string} record")]
-        public void WhenIEditExistingAndRecord(string Language, string Level)
+
+        [When("i see existing {string} and {string}")]
+        public void WhenISeeExistingAnd(string Language, string Level)
         {
             LanguagePage languagePageObj = new LanguagePage();
-            languagePageObj.EditLanguageRecord(driver, Language, Level);
+            languagePageObj.CreateLanguageRecord(driver, Language, Level);
         }
 
-        
-        [Then("the record for {string} and {string} should be updated successfully")]
-        public void ThenTheRecordForAndShouldBeUpdatedSuccessfully(string Language, string Level)
+        [When("I edit existing Language and Level with {string} and {string}")]
+        public void WhenIEditExistingLanguageAndLevelWithAnd(string NewLanguage, string NewLevel)
+        {
+            LanguagePage languagePageObj = new LanguagePage();
+            languagePageObj.EditLanguageRecord(driver, NewLanguage, NewLevel);
+        }
+        [Then("the {string} and {string} record should be updated successfully")]
+        public void ThenTheAndRecordShouldBeUpdatedSuccessfully(string NewLanguage, string NewLevel)
         {
             LanguagePage languagePageObj = new LanguagePage();
             string editedLanguage = languagePageObj.GetEditedLanguage(driver);
             string editedLevel = languagePageObj.GetEditedLevel(driver);
-            Assert.That(editedLanguage == Language, "Expected edited language and actual edited language do not match");
-            Assert.That(editedLevel == Level, "Expected edited level and actual edited level do not match");
+            Assert.That(editedLanguage == NewLanguage, "Expected edited language and actual edited language do not match");
+            Assert.That(editedLevel == NewLevel, "Expected edited level and actual edited level do not match");
+        }
+
+       
+        [When("i see existing {string} and {string} record")]
+        public void WhenISeeExistingAndRecord(string Language, string Level)
+        {
+            LanguagePage languagePageObj = new LanguagePage();
+            languagePageObj.CreateLanguageRecord(driver, Language, Level);
         }
 
         [When("I delete the existing language record")]

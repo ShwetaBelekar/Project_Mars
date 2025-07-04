@@ -67,20 +67,21 @@ namespace Project_Mars.Pages
             IWebElement newLevel = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/table/tbody[last()]/tr/td[2]"));
             return newLevel.Text;
         }
-        public void EditLanguageRecord(IWebDriver driver, string language, string level)
+        public void EditLanguageRecord(IWebDriver driver, string NewLanguage, string NewLevel)
         {
-            Thread.Sleep(2000);
+            Thread.Sleep(5000);
 
-            IWebElement editButton = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/table/tbody[3]/tr/td[3]/span[1]/i"));
+            IWebElement editButton = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/table/tbody[last()]/tr/td[3]/span[1]/i"));
             editButton.Click();
 
             IWebElement languageTextbox = driver.FindElement(By.XPath("//input[@placeholder='Add Language']"));
             languageTextbox.Clear();
-            languageTextbox.SendKeys(language);
+            languageTextbox.SendKeys(NewLanguage);
 
             IWebElement dropDownButton = driver.FindElement(By.XPath("//select[@class='ui dropdown']"));
-            SelectElement selectLevel = new SelectElement(dropDownButton);
-            selectLevel.SelectByText(level);
+            dropDownButton.SendKeys(NewLevel);
+            //SelectElement selectLevel = new SelectElement(dropDownButton);
+            //selectLevel.SelectByText(NewLevel);
 
             IWebElement updateButton = driver.FindElement(By.XPath("//input[@value='Update']"));
             updateButton.Click();
@@ -89,13 +90,13 @@ namespace Project_Mars.Pages
         }
         public string GetEditedLanguage(IWebDriver driver)
         {
-            IWebElement editedLanguage = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/table/tbody[3]/tr/td[1]"));
+            IWebElement editedLanguage = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/table/tbody[last()]/tr/td[1]"));
             return editedLanguage.Text;
         }
 
         public string GetEditedLevel(IWebDriver driver)
         {
-            IWebElement editedLevel = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/table/tbody[3]/tr/td[2]"));
+            IWebElement editedLevel = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/table/tbody[last()]/tr/td[2]"));
             return editedLevel.Text;
         }
 

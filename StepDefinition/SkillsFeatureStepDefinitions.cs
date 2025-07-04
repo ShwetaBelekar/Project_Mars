@@ -39,37 +39,54 @@ namespace Project_Mars.StepDefinition
             HomeToSkillsPage homeToSkillsPageObj = new HomeToSkillsPage();
             homeToSkillsPageObj.NavigateToSkills(driver);
         }
-       
-        [When("I create a Skill record")]
-        public void WhenICreateASkillRecord()
+
+        [When("I create a {string} with {string} record")]
+        public void WhenICreateAWithRecord(string Skill, string Level)
         {
             SkillsPage skillsPageObj = new SkillsPage();
-            skillsPageObj.CreateSkillRecord(driver);
+            skillsPageObj.CreateSkillRecord(driver, Skill, Level);
         }
 
-
-        [Then("the record should be created successfully for Skill")]
-        public void ThenTheRecordShouldBeCreatedSuccessfullyForSkill()
+        [Then("the record for {string} with {string} should be created successfully")]
+        public void ThenTheRecordForWithShouldBeCreatedSuccessfully(string Skill, string Level)
         {
             SkillsPage skillsPageObj = new SkillsPage();
             string newSkill = skillsPageObj.GetSkill(driver);
             string newSkillLevel = skillsPageObj.GetSkillLevel(driver);
-            Assert.That(newSkill == "Singing", "Actual Skill and Expected Skill do not match.");
-            Assert.That(newSkillLevel == "Beginner", "Actual Skilllevel and expected skilllevel do not match.");
-        }
-        [When("I update the level on an existing skill record")]
-        public void WhenIUpdateTheLevelOnAnExistingSkillRecord()
-        {
-            SkillsPage skillsPageObj = new SkillsPage();
-            skillsPageObj.EditSkillRecord(driver);
+            Assert.That(newSkill == Skill, "Actual Skill and Expected Skill do not match.");
+            Assert.That(newSkillLevel == Level, "Actual Skilllevel and expected skilllevel do not match.");
         }
 
-        [Then("the  skill record should have the updated level")]
-        public void ThenTheSkillRecordShouldHaveTheUpdatedLevel()
+        [When("i see existing {string} and {string} records")]
+        public void WhenISeeExistingAndRecords(string Skill, string Level)
         {
             SkillsPage skillsPageObj = new SkillsPage();
+            skillsPageObj.CreateSkillRecord(driver, Skill, Level);
+        }
+
+        [When("I update the existing skill and level with new {string} and {string}")]
+        public void WhenIUpdateTheExistingSkillAndLevelWithNewAnd(string NewSkill, string NewLevel)
+        {
+            SkillsPage skillsPageObj = new SkillsPage();
+            skillsPageObj.EditSkillRecord(driver, NewSkill, NewLevel);
+        }
+
+        [Then("the should the {string} and {string} record")]
+        public void ThenTheShouldTheAndRecord(string NewSkill, string NewLevel)
+        {
+            SkillsPage skillsPageObj = new SkillsPage();
+            string editedSkill = skillsPageObj.GetEditedSkill(driver);
             string editedSkillLevel = skillsPageObj.GetEditedSkillLevel(driver);
-            Assert.That(editedSkillLevel == "Intermediate", "Expected edited skill level and actual edited skill level do not match.");
+            Assert.That(editedSkill == NewSkill, "Expected edited skill and actual edited skill do not match");
+            Assert.That(editedSkillLevel == NewLevel, "Expected edited skill level and actual edited skill level do not match.");
+        }
+
+
+        [When("i see {string} and {string}")]
+        public void WhenISeeAnd(string Skill, string Level)
+        {
+            SkillsPage skillsPageObj = new SkillsPage();
+            skillsPageObj.CreateSkillRecord(driver, Skill, Level);
         }
 
         [When("I deleted the existing skill record")]
@@ -84,7 +101,7 @@ namespace Project_Mars.StepDefinition
         {
             Wait.WaitToBeClickable(driver, "XPath", "//div[@class='ns-box ns-growl ns-effect-jelly ns-type-success ns-show']", 2);
             IWebElement popupAlert = driver.FindElement(By.XPath("//div[@class='ns-box ns-growl ns-effect-jelly ns-type-success ns-show']"));
-            if (popupAlert.Text == "Singing has been deleted")
+            if (popupAlert.Text == "Drawing has been deleted")
             {
                 Assert.Pass("Record Deleted Succesfully");
             }
@@ -164,6 +181,45 @@ namespace Project_Mars.StepDefinition
 
         }
 
+        [When("I create {string} and {string} record successfully")]
+        public void WhenICreateAndRecordSuccessfully(string Skill, string Level)
+        {
+            SkillsPage skillsPageObj = new SkillsPage();
+            skillsPageObj.CreateSkillLevelRecord(driver, Skill, Level);
+            IWebElement newSkill = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[3]/div/div[2]/div/table/tbody[last()]/tr/td[1]"));
+
+            if (newSkill.Text == "ProblemSolving")
+            {
+                Console.WriteLine("ProblemSolving is created successfully!");
+            }
+            else
+            {
+                Console.WriteLine("ProblemSolving is not created successfully!");
+
+
+            }
+        }
+        [When("I create {string} and {string} record")]
+        public void WhenICreateAndRecord(string DuplicateSkill, string DuplicateLevel)
+        {
+            SkillsPage skillsPageObj = new SkillsPage();
+            skillsPageObj.CreateDuplicateSkillRecord(driver, DuplicateSkill, DuplicateLevel);
+        }
+
+        [Then("i should see error message for duplicate skill")]
+        public void ThenIShouldSeeErrorMessageForDuplicateSkill()
+        {
+            Wait.WaitToBeClickable(driver, "XPath", "//div[contains(@class, 'ns-box') and contains(@class, 'ns-type-error')]", 1);
+            IWebElement popupAlert = driver.FindElement(By.XPath("//div[contains(@class, 'ns-box') and contains(@class, 'ns-type-error')]"));
+            if (popupAlert.Text == "This skill is already exist in your skill list.")
+            {
+                Assert.Pass("Duplicate record not accepted");
+            }
+            else
+            {
+                Assert.Fail("Duplicate record accepted");
+            }
+        }
 
     }
 }

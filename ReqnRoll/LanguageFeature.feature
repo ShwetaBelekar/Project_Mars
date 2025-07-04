@@ -34,21 +34,25 @@ Scenario Outline: Create valid language and level record
 	Scenario Outline: Edit existing language and level record
 	Given I login to Project Mars
 	When I navigate to language
-	When I edit existing '<Language>' and '<Level>' record
-	Then the record for '<Language>' and '<Level>' should be updated successfully
+	When i see existing '<Language>' and '<Level>' 
+	When I edit existing Language and Level with '<NewLanguage>' and '<NewLevel>'
+	Then the '<NewLanguage>' and '<NewLevel>' record should be updated successfully
 	Examples:
-	| Language | Level            |
-	| Spanish  | Conversational   |  
-	| Python   | Basic            |
-	| Marathi  | Native/Bilingual |
-	| Hindi    | Fluent           |
+	| Language | Level            | NewLanguage | NewLevel |
+	| Spanish  | Conversational   | Java        | Fluent   |
+	| Python   | Basic            | English     | Basic    |
+	| Marathi  | Native/Bilingual | C#          | Fluent   |
+	| Hindi    | Fluent           | French      | Basic    |
 
-	Scenario: remove existing language and level record
+	Scenario Outline: remove existing language and level record
 	Given I login to Project Mars 
 	When  I navigate to language
+	When i see existing '<Language>' and '<Level>' record
 	When I delete the existing language record
 	Then i should see message that record deleted successfully
-	
+	Examples: 
+	| Language | Level   |
+	| English  | Fluent |
 	
 	
 

@@ -18,16 +18,18 @@ namespace Project_Mars.ReqnRoll
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Reqnroll", "2.0.0.0")]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [NUnit.Framework.TestFixtureAttribute()]
-    [NUnit.Framework.DescriptionAttribute("SigninFeature")]
+    [NUnit.Framework.DescriptionAttribute("Signin")]
     [NUnit.Framework.FixtureLifeCycleAttribute(NUnit.Framework.LifeCycle.InstancePerTestCase)]
-    public partial class SigninFeatureFeature
+    [NUnit.Framework.CategoryAttribute("Signin")]
+    public partial class SigninFeature
     {
         
         private global::Reqnroll.ITestRunner testRunner;
         
-        private static string[] featureTags = ((string[])(null));
+        private static string[] featureTags = new string[] {
+                "Signin"};
         
-        private static global::Reqnroll.FeatureInfo featureInfo = new global::Reqnroll.FeatureInfo(new global::System.Globalization.CultureInfo("en-US"), "ReqnRoll", "SigninFeature", "As a registered user I want to login to the portal with valid credentials \r\nand a" +
+        private static global::Reqnroll.FeatureInfo featureInfo = new global::Reqnroll.FeatureInfo(new global::System.Globalization.CultureInfo("en-US"), "ReqnRoll", "Signin", "As a registered user I want to login to the portal with valid credentials \r\nand a" +
                 "dd, edit and delete records in the language and skill module\r\nso that i can show" +
                 " my language and skill proficiency to the recruiters\r\nA short summary of the fea" +
                 "ture", global::Reqnroll.ProgrammingLanguage.CSharp, featureTags);
@@ -114,7 +116,7 @@ namespace Project_Mars.ReqnRoll
                     "tag1"};
             global::System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new global::System.Collections.Specialized.OrderedDictionary();
             global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Check if user is able to Signin to the portal with valid data", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 8
+#line 9
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
@@ -124,13 +126,13 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 await this.ScenarioStartAsync();
-#line 9
+#line 10
  await testRunner.GivenAsync("I get into the homepage", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
 #line hidden
-#line 10
+#line 11
  await testRunner.WhenAsync("I enter valid credentials", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
-#line 11
+#line 12
  await testRunner.ThenAsync("I should be able to Signin successfully", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
             }
@@ -149,7 +151,7 @@ this.ScenarioInitialize(scenarioInfo);
             argumentsOfScenario.Add("password", password);
             global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Check if user is unable to Signin to the portal with blank email and valid passwo" +
                     "rd", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 14
+#line 15
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
@@ -159,13 +161,13 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 await this.ScenarioStartAsync();
-#line 15
+#line 16
  await testRunner.GivenAsync("I get into the homepage", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
 #line hidden
-#line 16
+#line 17
  await testRunner.WhenAsync(string.Format("I enter blank \'{0}\' and valid \'{1}\'", email, password), ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
-#line 17
+#line 18
  await testRunner.ThenAsync(string.Format("I should see an error message for blank \'{0}\'", email), ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
             }
@@ -184,7 +186,7 @@ this.ScenarioInitialize(scenarioInfo);
             argumentsOfScenario.Add("password", password);
             global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Check if user is unable to Signin to the portal with valid email and blank passwo" +
                     "rd", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 23
+#line 24
  this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
@@ -194,13 +196,13 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 await this.ScenarioStartAsync();
-#line 24
+#line 25
  await testRunner.GivenAsync("I get into the homepage", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
 #line hidden
-#line 25
+#line 26
  await testRunner.WhenAsync(string.Format("I enter valid \'{0}\' and blank \'{1}\'", email, password), ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
-#line 26
+#line 27
  await testRunner.ThenAsync(string.Format("I should see an error message for \'{0}\'", password), ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
             }

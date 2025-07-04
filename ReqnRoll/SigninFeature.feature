@@ -1,4 +1,5 @@
-﻿Feature: SigninFeature
+﻿@Signin
+Feature: Signin
 As a registered user I want to login to the portal with valid credentials 
 and add, edit and delete records in the language and skill module
 so that i can show my language and skill proficiency to the recruiters

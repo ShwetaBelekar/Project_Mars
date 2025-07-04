@@ -56,6 +56,7 @@ namespace Project_Mars.Hooks
             LoginPage loginPageObj = new LoginPage();
             loginPageObj.LoginActions(driver);
 
+
             if (featureContext.FeatureInfo.Tags.Contains("language"))
             {
                 try
@@ -104,6 +105,13 @@ namespace Project_Mars.Hooks
                     driver.Quit();
                 }
 
+            }
+            else if (featureContext.FeatureInfo.Tags.Contains("Signin"))
+            {
+                if (driver != null)
+                {
+                    driver.Quit();
+                }
             }
         }
         
