@@ -32,4 +32,4 @@ Project Structure
 •Steps            # C# step implementations
 •Pages            # Page Object Model classes
 •Utilities        # For the process on inheritance
-
+•Hooks            # Before and After logic
