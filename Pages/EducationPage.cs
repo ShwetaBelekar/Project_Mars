@@ -43,8 +43,12 @@ namespace Project_Mars.Pages
             IWebElement addButton = driver.FindElement(By.XPath("//input[@value='Add']"));
             addButton.Click();
 
+        }
 
+        public void EditEducationRecord(IWebDriver driver)
+        {
 
         }
+
     }
 }

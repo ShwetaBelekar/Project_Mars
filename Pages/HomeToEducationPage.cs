@@ -7,21 +7,22 @@ using System.Threading.Tasks;
 
 namespace Project_Mars.Pages
 {
-    public class HomeToCertifications
+    public class HomeToEducationPage
     {
         private IWebDriver driver;
         private By profileTabXPath = By.XPath("//*[@id=\"account-profile-section\"]/div/section[1]/div/a[2]");
-        private By certificationOptionXPath = By.XPath("//a[text()='Certifications']");
-        public void NavigateToCertifications(IWebDriver driver)
+        private By educationOptionXPath = By.XPath("//a[text()='Education']");
+        public void NavigateToEducation(IWebDriver driver)
         {
             this.driver = driver;
             driver.FindElement(profileTabXPath).Click();
-            driver.FindElement(certificationOptionXPath).Click();
+            driver.FindElement(educationOptionXPath).Click();
             //Thread.Sleep(2000);
             //IWebElement profileTab = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[1]/div/a[2]"));
             //profileTab.Click();
 
-            //IWebElement certificationOption = driver.FindElement(By.XPath("//a[text()='Certifications']"));
+            //IWebElement educationOption = driver.FindElement(By.XPath("//a[text()='Education']"));
+            //educationOption.Click();
         }
     }
 }

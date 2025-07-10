@@ -1,8 +1,8 @@
 ﻿@language
 Feature: Language
 As a Project_Mars user
-I would like to create, edit and delete Skill records
-So that I can manage Skill successfully
+I would like to create, edit and delete language records
+So that I can manage language successfully
 
 A short summary of the feature
 
