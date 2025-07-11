@@ -109,3 +109,15 @@ Scenario Outline: Create valid language and level record
 	Examples: 
 	| Language | Level  | duplicatelanguage | duplicatelevel |
 	| English  | Fluent | English           | Fluent         |
+
+	Scenario Outline: Create valid Education record
+	Given I login to Project Mars
+	When I navigate to education
+	When I create valid education '<collegeuniversityname>' '<countryofcollegeuniversity>' '<title>' '<degree>' '<yearofgraducation>' record
+	Then the record for valid '<collegeuniversityname>' '<countryofcollegeuniversity>' '<title>' '<degree>' '<yearofgraducation>' should be created successfully
+	Examples:
+	| collegeuniversityname | countryofcollegeuniversity | title | degree | yearofgraducation |
+	| mumbai university     |  India                     | PHD   |    Economics    |    2007               |
+	| model college         | Switzerland                | M.B.A |  Commerce      |     2020              |
+	| newyork university    | United States              |    MFA|    Science    |       2001            |
+	| american college      | New Zealand                | Associate|    Arts    |      2024             |

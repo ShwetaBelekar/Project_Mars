@@ -29,8 +29,8 @@ namespace Project_Mars.ReqnRoll
         private static string[] featureTags = new string[] {
                 "language"};
         
-        private static global::Reqnroll.FeatureInfo featureInfo = new global::Reqnroll.FeatureInfo(new global::System.Globalization.CultureInfo("en-US"), "ReqnRoll", "Language", "As a Project_Mars user\r\nI would like to create, edit and delete Skill records\r\nSo" +
-                " that I can manage Skill successfully\r\n\r\nA short summary of the feature", global::Reqnroll.ProgrammingLanguage.CSharp, featureTags);
+        private static global::Reqnroll.FeatureInfo featureInfo = new global::Reqnroll.FeatureInfo(new global::System.Globalization.CultureInfo("en-US"), "ReqnRoll", "Language", "As a Project_Mars user\r\nI would like to create, edit and delete language records\r" +
+                "\nSo that I can manage language successfully\r\n\r\nA short summary of the feature", global::Reqnroll.ProgrammingLanguage.CSharp, featureTags);
         
 #line 1 "LanguageFeature.feature"
 #line hidden
@@ -461,6 +461,49 @@ this.ScenarioInitialize(scenarioInfo);
 #line hidden
 #line 107
  await testRunner.ThenAsync("i should see error message for duplicate record", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
+#line hidden
+            }
+            await this.ScenarioCleanupAsync();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Create valid Education record")]
+        [NUnit.Framework.TestCaseAttribute("mumbai university", "India", "PHD", "Economics", "2007", null)]
+        [NUnit.Framework.TestCaseAttribute("model college", "Switzerland", "M.B.A", "Commerce", "2020", null)]
+        [NUnit.Framework.TestCaseAttribute("newyork university", "United States", "MFA", "Science", "2001", null)]
+        [NUnit.Framework.TestCaseAttribute("american college", "New Zealand", "Associate", "Arts", "2024", null)]
+        public async global::System.Threading.Tasks.Task CreateValidEducationRecord(string collegeuniversityname, string countryofcollegeuniversity, string title, string degree, string yearofgraducation, string[] exampleTags)
+        {
+            string[] tagsOfScenario = exampleTags;
+            global::System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new global::System.Collections.Specialized.OrderedDictionary();
+            argumentsOfScenario.Add("collegeuniversityname", collegeuniversityname);
+            argumentsOfScenario.Add("countryofcollegeuniversity", countryofcollegeuniversity);
+            argumentsOfScenario.Add("title", title);
+            argumentsOfScenario.Add("degree", degree);
+            argumentsOfScenario.Add("yearofgraducation", yearofgraducation);
+            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Create valid Education record", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 113
+ this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                await this.ScenarioStartAsync();
+#line 114
+ await testRunner.GivenAsync("I login to Project Mars", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
+#line hidden
+#line 115
+ await testRunner.WhenAsync("I navigate to education", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
+#line hidden
+#line 116
+ await testRunner.WhenAsync(string.Format("I create valid education \'{0}\' \'{1}\' \'{2}\' \'{3}\' \'{4}\' record", collegeuniversityname, countryofcollegeuniversity, title, degree, yearofgraducation), ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
+#line hidden
+#line 117
+ await testRunner.ThenAsync(string.Format("the record for valid \'{0}\' \'{1}\' \'{2}\' \'{3}\' \'{4}\' should be created successfully" +
+                            "", collegeuniversityname, countryofcollegeuniversity, title, degree, yearofgraducation), ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
             }
             await this.ScenarioCleanupAsync();
