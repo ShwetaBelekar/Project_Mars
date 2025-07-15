@@ -110,14 +110,20 @@ Scenario Outline: Create valid language and level record
 	| Language | Level  | duplicatelanguage | duplicatelevel |
 	| English  | Fluent | English           | Fluent         |
 
-	Scenario Outline: Create valid Education record
+	Scenario Outline: create invalid education record
 	Given I login to Project Mars
 	When I navigate to education
-	When I create valid education '<collegeuniversityname>' '<countryofcollegeuniversity>' '<title>' '<degree>' '<yearofgraducation>' record
-	Then the record for valid '<collegeuniversityname>' '<countryofcollegeuniversity>' '<title>' '<degree>' '<yearofgraducation>' should be created successfully
+	When I create invalid education '<collegeuniversityname>' '<countryofcollegeuniversity>' '<title>' '<degree>' '<yearofgraducation>' record
+	Then if system accepts record with invalid data then there is error in the system
 	Examples:
-	| collegeuniversityname | countryofcollegeuniversity | title | degree | yearofgraducation |
-	| mumbai university     |  India                     | PHD   |    Economics    |    2007               |
-	| model college         | Switzerland                | M.B.A |  Commerce      |     2020              |
-	| newyork university    | United States              |    MFA|    Science    |       2001            |
-	| american college      | New Zealand                | Associate|    Arts    |      2024             |
+	| collegeuniversityname | countryofcollegeuniversity | title | degree    | yearofgraducation |
+	|  1234    | India                      | PHD   |GrassCutting  | 2007                       |
+	|  ABCDEFGH    | Belgium                      | M.B.A   |DrinkingWater  | 2008                       |
+	|  123@@@@###abcEFG    |  Australia                   | MFA | WashingUtensils | 2009                      |
+	| BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB     | China                     |B.A  | Cleaning | 2010                      |
+	|   @@@@###$$$%%%%^^^   |             Zambia       |  B.Sc  | Roaming | 2011                       |
+
+
+
+
+

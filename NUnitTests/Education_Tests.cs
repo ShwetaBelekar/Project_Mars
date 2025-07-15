@@ -29,18 +29,15 @@ namespace Project_Mars.NUnitTests
             HomeToEducationPage homeToEducationPageObj = new HomeToEducationPage();
             homeToEducationPageObj.NavigateToEducation(driver);
         }
-        [Test]
+        [Test(Description = "Create Valid Education Record")]
         [TestCase("mumbai university", "India", "PHD", "Economics", "2007")]
         [TestCase("model college", "Switzerland", "M.B.A", "Commerce", "2020")]
         [TestCase("newyork university", "United States", "MFA", "Science", "2001")]
         [TestCase("american college", "New Zealand", "Associate", "Arts", "2024")]
-        public void CreateEducationRecord(string collegeUniversityName, string countryOfCollegeUniversity, string title, string degree, string yearOfGraduation)
+        public void CreateValidEducationRecord(string collegeUniversityName, string countryOfCollegeUniversity, string title, string degree, string yearOfGraduation)
         {
             EducationPage educationPageObj = new EducationPage();
             educationPageObj.CreateEducationRecord(driver, collegeUniversityName, countryOfCollegeUniversity, title, degree, yearOfGraduation);
-        }
-        public void IsRecordCreatedSuccessfully(string collegeUniversityName, string countryOfCollegeUniversity, string title, string degree, string yearOfGraduation)
-        {
             IWebElement newuniversity = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[4]/div/div[2]/div/table/tbody[last()]/tr/td[2]"));
             IWebElement newcountry = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[4]/div/div[2]/div/table/tbody[last()]/tr/td[1]"));
             IWebElement newtitle = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[4]/div/div[2]/div/table/tbody[last()]/tr/td[3]"));
@@ -54,7 +51,52 @@ namespace Project_Mars.NUnitTests
             {
                 Assert.Fail("record creation unsuccessful");
             }
+        }
+        
+        [Test(Description = "Check if the system accepts blank field education record")]
+        [TestCase("mumbai university", "India", "PHD", "", "2007")]
+        [TestCase("", "India", "PHD", "Economics", "2007")]
+        [TestCase("mumbai university", "", "PHD", "Economics", "2007")]
+        [TestCase("mumbai university", "India", "", "Economics", "2007")]
+        [TestCase("mumbai university", "India", "PHD", "Economics", "")]
+        public void TryToCreateEducationRecordWithBlankField(string collegeUniversityName, string countryOfCollegeUniversity, string title, string degree, string yearOfGraduation)
+        {
+            EducationPage educationPageObj = new EducationPage();
+            educationPageObj.CreateEducationRecord(driver, collegeUniversityName, countryOfCollegeUniversity, title, degree, yearOfGraduation);
+            
+            string popupAlert = educationPageObj.BlankField(driver);
+            if (popupAlert == "Please enter all the fields")
+            {
+                Assert.Pass("Blank field record not accepted and Popup message says please enter all fields");
+            }
+            else
+            {
+                Assert.Fail("Blank field record is accepted and no popup message appears");
+            }
 
         }
+        [Test(Description = "Create invalid education record")]
+        [TestCase("1234", "India", "PHD", "GrassCutting", "2007")]
+        [TestCase("ABCDEFGH", "Belgium", "M.B.A", "DrinkingWater", "2008")]
+        [TestCase("123@@@@###abcEFG", "Australia", "MFA", "WashingUtensils", "2009")]
+        [TestCase("BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB", "China", "B.A", "Cleaning", "2010")]
+        [TestCase("@@@@###$$$%%%%^^^", "Zambia", "B.Sc", "Roaming", "2011")]
+        public void CreateInvalidEducationRecord(string collegeUniversityName, string countryOfCollegeUniversity, string title, string degree, string yearOfGraduation)
+        {
+            EducationPage educationPageObj = new EducationPage();
+            educationPageObj.CreateEducationRecord(driver, collegeUniversityName, countryOfCollegeUniversity, title, degree, yearOfGraduation);
+            IWebElement newuniversity = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[4]/div/div[2]/div/table/tbody[last()]/tr/td[2]"));
+            IWebElement newdegree = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[4]/div/div[2]/div/table/tbody[last()]/tr/td[4]"));
+            if (newuniversity.Text == collegeUniversityName &&  newdegree.Text == degree)
+            {
+                Assert.Pass("Invalid record accepted error in the system");
+            }
+            else
+            {
+                Assert.Fail("Invalid record not accepted no error in the system");
+            }
+        }
+
+
     }
 }

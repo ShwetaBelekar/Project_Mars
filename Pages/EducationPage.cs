@@ -42,9 +42,17 @@ namespace Project_Mars.Pages
 
             IWebElement addButton = driver.FindElement(By.XPath("//input[@value='Add']"));
             addButton.Click();
+            Thread.Sleep(5000);
 
         }
-        
+
+        public string BlankField(IWebDriver driver)
+        {
+            IWebElement popupAlert = driver.FindElement(By.XPath("//div[@class='ns-box ns-growl ns-effect-jelly ns-type-error ns-show']"));
+            return popupAlert.Text;
+        }
+
+
         public void EditEducationRecord(IWebDriver driver)
         {
 

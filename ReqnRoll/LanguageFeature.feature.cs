@@ -467,12 +467,13 @@ this.ScenarioInitialize(scenarioInfo);
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Create valid Education record")]
-        [NUnit.Framework.TestCaseAttribute("mumbai university", "India", "PHD", "Economics", "2007", null)]
-        [NUnit.Framework.TestCaseAttribute("model college", "Switzerland", "M.B.A", "Commerce", "2020", null)]
-        [NUnit.Framework.TestCaseAttribute("newyork university", "United States", "MFA", "Science", "2001", null)]
-        [NUnit.Framework.TestCaseAttribute("american college", "New Zealand", "Associate", "Arts", "2024", null)]
-        public async global::System.Threading.Tasks.Task CreateValidEducationRecord(string collegeuniversityname, string countryofcollegeuniversity, string title, string degree, string yearofgraducation, string[] exampleTags)
+        [NUnit.Framework.DescriptionAttribute("create invalid education record")]
+        [NUnit.Framework.TestCaseAttribute("1234", "India", "PHD", "GrassCutting", "2007", null)]
+        [NUnit.Framework.TestCaseAttribute("ABCDEFGH", "Belgium", "M.B.A", "DrinkingWater", "2008", null)]
+        [NUnit.Framework.TestCaseAttribute("123@@@@###abcEFG", "Australia", "MFA", "WashingUtensils", "2009", null)]
+        [NUnit.Framework.TestCaseAttribute("BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB", "China", "B.A", "Cleaning", "2010", null)]
+        [NUnit.Framework.TestCaseAttribute("@@@@###$$$%%%%^^^", "Zambia", "B.Sc", "Roaming", "2011", null)]
+        public async global::System.Threading.Tasks.Task CreateInvalidEducationRecord(string collegeuniversityname, string countryofcollegeuniversity, string title, string degree, string yearofgraducation, string[] exampleTags)
         {
             string[] tagsOfScenario = exampleTags;
             global::System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new global::System.Collections.Specialized.OrderedDictionary();
@@ -481,7 +482,7 @@ this.ScenarioInitialize(scenarioInfo);
             argumentsOfScenario.Add("title", title);
             argumentsOfScenario.Add("degree", degree);
             argumentsOfScenario.Add("yearofgraducation", yearofgraducation);
-            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Create valid Education record", null, tagsOfScenario, argumentsOfScenario, featureTags);
+            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("create invalid education record", null, tagsOfScenario, argumentsOfScenario, featureTags);
 #line 113
  this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -499,11 +500,10 @@ this.ScenarioInitialize(scenarioInfo);
  await testRunner.WhenAsync("I navigate to education", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
 #line 116
- await testRunner.WhenAsync(string.Format("I create valid education \'{0}\' \'{1}\' \'{2}\' \'{3}\' \'{4}\' record", collegeuniversityname, countryofcollegeuniversity, title, degree, yearofgraducation), ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
+ await testRunner.WhenAsync(string.Format("I create invalid education \'{0}\' \'{1}\' \'{2}\' \'{3}\' \'{4}\' record", collegeuniversityname, countryofcollegeuniversity, title, degree, yearofgraducation), ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
 #line 117
- await testRunner.ThenAsync(string.Format("the record for valid \'{0}\' \'{1}\' \'{2}\' \'{3}\' \'{4}\' should be created successfully" +
-                            "", collegeuniversityname, countryofcollegeuniversity, title, degree, yearofgraducation), ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
+ await testRunner.ThenAsync("if system accepts record with invalid data then there is error in the system", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
             }
             await this.ScenarioCleanupAsync();
