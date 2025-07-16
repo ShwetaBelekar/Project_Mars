@@ -2,6 +2,7 @@
 using OpenQA.Selenium;
 using OpenQA.Selenium.BiDi.Modules.Log;
 using OpenQA.Selenium.Chrome;
+using Project_Mars.BaseClass;
 using Project_Mars.Pages;
 using Project_Mars.Utilities;
 using System;
@@ -13,7 +14,7 @@ using System.Threading.Tasks;
 namespace Project_Mars.NUnitTests
 {
     [TestFixture]
-    public class Education_Tests : CommonDriver
+    public class Education_Tests : BaseTest
     {
 
         [SetUp]
