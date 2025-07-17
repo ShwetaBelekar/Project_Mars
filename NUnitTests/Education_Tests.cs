@@ -18,14 +18,14 @@ namespace Project_Mars.NUnitTests
     {
 
         [SetUp]
-       public void SetUpSteps()
+        public void SetUpSteps()
         {
-            driver = new ChromeDriver();
+            //driver = new ChromeDriver();
 
-            LoginPage loginPageObj = new LoginPage();
-            loginPageObj.LoginActions(driver);
+            //LoginPage loginPageObj = new LoginPage();
+            //loginPageObj.LoginActions(driver);
 
-            loginPageObj.VerifyUserInHomePage(driver);
+            //loginPageObj.VerifyUserInHomePage(driver);
 
             HomeToEducationPage homeToEducationPageObj = new HomeToEducationPage();
             homeToEducationPageObj.NavigateToEducation(driver);
@@ -54,6 +54,8 @@ namespace Project_Mars.NUnitTests
             }
         }
         
+
+
         [Test(Description = "Check if the system accepts blank field education record")]
         [TestCase("mumbai university", "India", "PHD", "", "2007")]
         [TestCase("", "India", "PHD", "Economics", "2007")]
@@ -76,6 +78,8 @@ namespace Project_Mars.NUnitTests
             }
 
         }
+        
+
         [Test(Description = "Create invalid education record")]
         [TestCase("1234", "India", "PHD", "GrassCutting", "2007")]
         [TestCase("ABCDEFGH", "Belgium", "M.B.A", "DrinkingWater", "2008")]
@@ -95,6 +99,15 @@ namespace Project_Mars.NUnitTests
             else
             {
                 Assert.Fail("Invalid record not accepted no error in the system");
+            }
+        }
+
+        [TearDown]
+        public void Close()
+        {
+            if (driver != null)
+            {
+                driver.Quit();
             }
         }
 
