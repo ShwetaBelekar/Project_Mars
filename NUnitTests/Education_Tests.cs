@@ -101,7 +101,44 @@ namespace Project_Mars.NUnitTests
                 Assert.Fail("Invalid record not accepted no error in the system");
             }
         }
+        [Test(Description = "Create Duplicate Education Record")]
+        [TestCase("mumbai university", "India", "PHD", "Economics", "2007")]
+        
 
+        public void CreateDuplicateEducationRecord(string collegeUniversityName, string countryOfCollegeUniversity, string title, string degree, string yearOfGraduation)
+      
+        {
+            EducationPage educationPageObj = new EducationPage();
+            educationPageObj.CreateEducationRecord(driver, collegeUniversityName, countryOfCollegeUniversity, title, degree, yearOfGraduation);
+            IWebElement newuniversity = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[4]/div/div[2]/div/table/tbody[last()]/tr/td[2]"));
+            IWebElement newcountry = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[4]/div/div[2]/div/table/tbody[last()]/tr/td[1]"));
+            IWebElement newtitle = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[4]/div/div[2]/div/table/tbody[last()]/tr/td[3]"));
+            IWebElement newdegree = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[4]/div/div[2]/div/table/tbody[last()]/tr/td[4]"));
+            IWebElement newgraduationyear = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[4]/div/div[2]/div/table/tbody[last()]/tr/td[5]"));
+            
+            if (newuniversity.Text == collegeUniversityName && newcountry.Text == countryOfCollegeUniversity && newtitle.Text == title && newdegree.Text == degree && newgraduationyear.Text == yearOfGraduation)
+            {
+                Console.WriteLine("record created successfully");
+            }
+            else
+            {
+                Console.WriteLine("record creation unsuccessful");
+            }
+            
+            educationPageObj.CreateEducationRecord(driver, collegeUniversityName, countryOfCollegeUniversity, title, degree, yearOfGraduation);
+            IWebElement popupAlert = driver.FindElement(By.XPath("//div[@class='ns-box ns-growl ns-effect-jelly ns-type-error ns-show']"));
+            if (popupAlert.Text == "This information is already exist.")
+            {
+                Assert.Pass("Duplicate record not accepted");
+            }
+            else
+            {
+                Assert.Fail("Duplicate record accepted");
+            }
+        }
+      
+        
+       
         [TearDown]
         public void Close()
         {

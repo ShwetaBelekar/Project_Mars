@@ -110,19 +110,17 @@ Scenario Outline: Create valid language and level record
 	| Language | Level  | duplicatelanguage | duplicatelevel |
 	| English  | Fluent | English           | Fluent         |
 
-	Scenario Outline: create invalid education record
+	Scenario Outline: create duplicate education record
 	Given I login to Project Mars
 	When I navigate to education
-	When I create invalid education '<collegeuniversityname>' '<countryofcollegeuniversity>' '<title>' '<degree>' '<yearofgraducation>' record
-	Then if system accepts record with invalid data then there is error in the system
+	When I create education '<collegeuniversityname>' '<countryofcollegeuniversity>' '<title>' '<degree>' '<yearofgraduation>' record
+	Then i create duplicate education '<duplicatecollegeuniversityname>' '<duplicatecountryofcollegeuniversity>' '<duplicatetitle>' '<duplicatedegree>' '<duplicateyearofgraduation>' record
+	Then i should see error message for duplicate education record
 	Examples:
-	| collegeuniversityname | countryofcollegeuniversity | title | degree    | yearofgraducation |
-	|  1234    | India                      | PHD   |GrassCutting  | 2007                       |
-	|  ABCDEFGH    | Belgium                      | M.B.A   |DrinkingWater  | 2008                       |
-	|  123@@@@###abcEFG    |  Australia                   | MFA | WashingUtensils | 2009                      |
-	| BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB     | China                     |B.A  | Cleaning | 2010                      |
-	|   @@@@###$$$%%%%^^^   |             Zambia       |  B.Sc  | Roaming | 2011                       |
-
+	| collegeuniversityname | countryofcollegeuniversity | title | degree    | yearofgraduation |duplicatecollegeuniversityname | duplicatecountryofcollegeuniversity | duplicatetitle | duplicatedegree    | duplicateyearofgraducation |
+	|  Mumbai University  | India                      | PHD   |Commerce  | 2007                 |  Mumbai University  | India                      | PHD   |Commerce  | 2007                 |
+	
+	
 
 
 
