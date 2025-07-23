@@ -110,15 +110,15 @@ Scenario Outline: Create valid language and level record
 	| Language | Level  | duplicatelanguage | duplicatelevel |
 	| English  | Fluent | English           | Fluent         |
 
-	Scenario Outline: create duplicate education record
+	Scenario Outline: Title dropdown button not working as expected
 	Given I login to Project Mars
 	When I navigate to education
-	When I create education '<collegeuniversityname>' '<countryofcollegeuniversity>' '<title>' '<degree>' '<yearofgraduation>' record
-	Then i create duplicate education '<duplicatecollegeuniversityname>' '<duplicatecountryofcollegeuniversity>' '<duplicatetitle>' '<duplicatedegree>' '<duplicateyearofgraduation>' record
-	Then i should see error message for duplicate education record
+	When I enter education '<collegeuniversityname>' '<countryofcollegeuniversity>' '<title>' '<degree>' '<yearofgraduation>' record
+	Then i change education '<title>' record back to title
+	Then if the system accepts this education record there is a defect in title dropdown button
 	Examples:
-	| collegeuniversityname | countryofcollegeuniversity | title | degree    | yearofgraduation |duplicatecollegeuniversityname | duplicatecountryofcollegeuniversity | duplicatetitle | duplicatedegree    | duplicateyearofgraducation |
-	|  Mumbai University  | India                      | PHD   |Commerce  | 2007                 |  Mumbai University  | India                      | PHD   |Commerce  | 2007                 |
+	| collegeuniversityname | countryofcollegeuniversity | title | degree    | yearofgraduation | 
+	|  Mumbai University  | India                      | PHD   |Commerce  | 2007                 |  
 	
 	
 

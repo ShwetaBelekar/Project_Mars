@@ -467,9 +467,9 @@ this.ScenarioInitialize(scenarioInfo);
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("create duplicate education record")]
-        [NUnit.Framework.TestCaseAttribute("Mumbai University", "India", "PHD", "Commerce", "2007", "Mumbai University", "India", "PHD", "Commerce", "2007", null)]
-        public async global::System.Threading.Tasks.Task CreateDuplicateEducationRecord(string collegeuniversityname, string countryofcollegeuniversity, string title, string degree, string yearofgraduation, string duplicatecollegeuniversityname, string duplicatecountryofcollegeuniversity, string duplicatetitle, string duplicatedegree, string duplicateyearofgraducation, string[] exampleTags)
+        [NUnit.Framework.DescriptionAttribute("Title dropdown button not working as expected")]
+        [NUnit.Framework.TestCaseAttribute("Mumbai University", "India", "PHD", "Commerce", "2007", null)]
+        public async global::System.Threading.Tasks.Task TitleDropdownButtonNotWorkingAsExpected(string collegeuniversityname, string countryofcollegeuniversity, string title, string degree, string yearofgraduation, string[] exampleTags)
         {
             string[] tagsOfScenario = exampleTags;
             global::System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new global::System.Collections.Specialized.OrderedDictionary();
@@ -478,12 +478,7 @@ this.ScenarioInitialize(scenarioInfo);
             argumentsOfScenario.Add("title", title);
             argumentsOfScenario.Add("degree", degree);
             argumentsOfScenario.Add("yearofgraduation", yearofgraduation);
-            argumentsOfScenario.Add("duplicatecollegeuniversityname", duplicatecollegeuniversityname);
-            argumentsOfScenario.Add("duplicatecountryofcollegeuniversity", duplicatecountryofcollegeuniversity);
-            argumentsOfScenario.Add("duplicatetitle", duplicatetitle);
-            argumentsOfScenario.Add("duplicatedegree", duplicatedegree);
-            argumentsOfScenario.Add("duplicateyearofgraducation", duplicateyearofgraducation);
-            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("create duplicate education record", null, tagsOfScenario, argumentsOfScenario, featureTags);
+            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Title dropdown button not working as expected", null, tagsOfScenario, argumentsOfScenario, featureTags);
 #line 113
  this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -501,14 +496,14 @@ this.ScenarioInitialize(scenarioInfo);
  await testRunner.WhenAsync("I navigate to education", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
 #line 116
- await testRunner.WhenAsync(string.Format("I create education \'{0}\' \'{1}\' \'{2}\' \'{3}\' \'{4}\' record", collegeuniversityname, countryofcollegeuniversity, title, degree, yearofgraduation), ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
+ await testRunner.WhenAsync(string.Format("I enter education \'{0}\' \'{1}\' \'{2}\' \'{3}\' \'{4}\' record", collegeuniversityname, countryofcollegeuniversity, title, degree, yearofgraduation), ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
 #line 117
- await testRunner.ThenAsync(string.Format("i create duplicate education \'{0}\' \'{1}\' \'{2}\' \'{3}\' \'<duplicateyearofgraduation>" +
-                            "\' record", duplicatecollegeuniversityname, duplicatecountryofcollegeuniversity, duplicatetitle, duplicatedegree), ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
+ await testRunner.ThenAsync(string.Format("i change education \'{0}\' record back to title", title), ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
 #line 118
- await testRunner.ThenAsync("i should see error message for duplicate education record", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
+ await testRunner.ThenAsync("if the system accepts this education record there is a defect in title dropdown b" +
+                        "utton", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
             }
             await this.ScenarioCleanupAsync();

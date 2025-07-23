@@ -136,9 +136,68 @@ namespace Project_Mars.NUnitTests
                 Assert.Fail("Duplicate record accepted");
             }
         }
-      
+        [Test]
+        public void TitleDropdownButtonNotWorkingAsExpected()
+        {
+            EducationPage educationPageObj = new EducationPage();
+            educationPageObj.CheckTitleDropdownButton(driver);
+            IWebElement popupAlert = driver.FindElement(By.XPath("//div[@class='ns-box ns-growl ns-effect-jelly ns-type-success ns-show']"));
+            if(popupAlert.Text == "Education has been added")
+            {
+                Console.WriteLine("Record accepted");
+            }
+            else
+            {
+                Console.WriteLine("Record not accepted");
+            }
+            IWebElement title = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[4]/div/div[2]/div/table/tbody[last()]/tr/td[3]"));
+            if (title.Text == "0")
+            {
+                Assert.Pass("system accepts this education record there is a defect in title dropdown button");
+            }
+            else
+            {
+                Assert.Fail("system didn't accepts this education record");
+            }
+        }
+        [Test(Description = "Edit exisitng education record")]
+        [TestCase("mumbai university", "India", "PHD", "Economics", "2007", "model college", "Switzerland", "M.B.A", "Commerce", "2020")]
         
-       
+        public void EditExistingEducationRecord(string collegeUniversityName, string countryOfCollegeUniversity, string title, string degree, string yearOfGraduation, string newcollegeUniversityName, string newcountryOfCollegeUniversity, string newtitle, string newdegree, string newyearOfGraduation)
+        {
+            EducationPage educationPageObj = new EducationPage();
+            educationPageObj.CreateEducationRecord(driver, collegeUniversityName, countryOfCollegeUniversity, title, degree, yearOfGraduation);
+            IWebElement createduniversity = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[4]/div/div[2]/div/table/tbody[last()]/tr/td[2]"));
+            IWebElement createdcountry = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[4]/div/div[2]/div/table/tbody[last()]/tr/td[1]"));
+            IWebElement createdtitle = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[4]/div/div[2]/div/table/tbody[last()]/tr/td[3]"));
+            IWebElement createddegree = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[4]/div/div[2]/div/table/tbody[last()]/tr/td[4]"));
+            IWebElement createdgraduationyear = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[4]/div/div[2]/div/table/tbody[last()]/tr/td[5]"));
+            if (createduniversity.Text == collegeUniversityName && createdcountry.Text == countryOfCollegeUniversity && createdtitle.Text == title && createddegree.Text == degree && createdgraduationyear.Text == yearOfGraduation)
+            {
+                Console.WriteLine("record created successfully");
+            }
+            else
+            {
+                Console.WriteLine("record creation unsuccessful");
+            }
+            educationPageObj.EditEducationRecord(driver,newcollegeUniversityName,newcountryOfCollegeUniversity,newtitle,newdegree,newyearOfGraduation);
+            IWebElement editeduniversity = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[4]/div/div[2]/div/table/tbody[last()]/tr/td[2]"));
+            IWebElement editedcountry = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[4]/div/div[2]/div/table/tbody[last()]/tr/td[1]"));
+            IWebElement editedtitle = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[4]/div/div[2]/div/table/tbody[last()]/tr/td[3]"));
+            IWebElement editeddegree = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[4]/div/div[2]/div/table/tbody[last()]/tr/td[4]"));
+            IWebElement editedgraduationyear = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[4]/div/div[2]/div/table/tbody[last()]/tr/td[5]"));
+            if (editeduniversity.Text == newcollegeUniversityName && editedcountry.Text == newcountryOfCollegeUniversity && editedtitle.Text == newtitle && editeddegree.Text == newdegree && editedgraduationyear.Text == newyearOfGraduation)
+            {
+                Assert.Pass("record edited successfully");
+            }
+            else
+            {
+                Assert.Fail("record not edited");
+            }
+        }
+
+
+
         [TearDown]
         public void Close()
         {
