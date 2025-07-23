@@ -10,6 +10,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Microsoft.ApplicationInsights.MetricDimensionNames.TelemetryContext;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Project_Mars.NUnitTests
 {
@@ -162,7 +164,8 @@ namespace Project_Mars.NUnitTests
         }
         [Test(Description = "Edit exisitng education record")]
         [TestCase("mumbai university", "India", "PHD", "Economics", "2007", "model college", "Switzerland", "M.B.A", "Commerce", "2020")]
-        
+        [TestCase("newyork university", "United States", "MFA", "Science", "2001", "american college", "New Zealand", "Associate", "Arts", "2024")]
+
         public void EditExistingEducationRecord(string collegeUniversityName, string countryOfCollegeUniversity, string title, string degree, string yearOfGraduation, string newcollegeUniversityName, string newcountryOfCollegeUniversity, string newtitle, string newdegree, string newyearOfGraduation)
         {
             EducationPage educationPageObj = new EducationPage();
@@ -195,6 +198,49 @@ namespace Project_Mars.NUnitTests
                 Assert.Fail("record not edited");
             }
         }
+
+        [Test(Description = "Canceling an edit operation should correctly discards changes but system is not doing this it is saving unexpected changes")]
+        [TestCase("mumbai university", "India", "PHD", "Economics", "2007","M.B.A")]
+        public void Cancelinganeditoperationcorrectlydiscardschanges(string collegeUniversityName, string countryOfCollegeUniversity, string title, string degree, string yearOfGraduation,string newtitle) 
+        {
+            EducationPage educationPageObj = new EducationPage();
+            educationPageObj.CreateEducationRecord(driver, collegeUniversityName, countryOfCollegeUniversity, title, degree, yearOfGraduation);
+            IWebElement popupAlert = driver.FindElement(By.XPath("//div[@class='ns-box ns-growl ns-effect-jelly ns-type-success ns-show']"));
+            if(popupAlert.Text == "Education has been added")
+            {
+                Console.WriteLine("Education record created successfully");
+            }
+            else
+            {
+                Console.WriteLine("Education record not created");
+            }
+                
+            IWebElement createduniversity = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[4]/div/div[2]/div/table/tbody[last()]/tr/td[2]"));
+            IWebElement createdcountry = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[4]/div/div[2]/div/table/tbody[last()]/tr/td[1]"));
+            IWebElement createdtitle = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[4]/div/div[2]/div/table/tbody[last()]/tr/td[3]"));
+            IWebElement createddegree = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[4]/div/div[2]/div/table/tbody[last()]/tr/td[4]"));
+            IWebElement createdgraduationyear = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[4]/div/div[2]/div/table/tbody[last()]/tr/td[5]"));
+            if (createduniversity.Text == collegeUniversityName && createdcountry.Text == countryOfCollegeUniversity && createdtitle.Text == title && createddegree.Text == degree && createdgraduationyear.Text == yearOfGraduation)
+            {
+                Console.WriteLine("record created successfully");
+            }
+            else
+            {
+                Console.WriteLine("record creation unsuccessful");
+            }
+            educationPageObj.CancelEditOperation(driver, newtitle);
+            IWebElement Title = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[4]/div/div[2]/div/table/tbody[last()]/tr/td[3]"));
+            if (Title.Text == newtitle)
+            {
+                Assert.Pass("Canceling an edit operation should correctly discards changes and Subsequent edits respect the cancellation and do not save unexpected changes. No system is not doing this");
+            }
+            else
+            {
+                Assert.Fail("Canceling an edit operation should correctly discards changes and Subsequent edits respect the cancellation and do not save unexpected changes. Yes system is not doing this");
+            }
+        }
+      
+
 
 
 

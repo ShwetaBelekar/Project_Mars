@@ -10,6 +10,8 @@ namespace Project_Mars.Pages
 {
     public class EducationPage
     {
+        private IWebDriver driver;
+
         public void CreateEducationRecord(IWebDriver driver, string collegeUniversityName, string countryOfCollegeUniversity, string title, string degree, string yearOfGraduation)
         {
             IWebElement addNewButton = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[4]/div/div[2]/div/table/thead/tr/th[6]/div"));
@@ -44,7 +46,7 @@ namespace Project_Mars.Pages
             
                 IWebElement addButton = driver.FindElement(By.XPath("//input[@value='Add']"));
                 addButton.Click();
-            Thread.Sleep(5000);
+            Thread.Sleep(2000);
            
         }
 
@@ -100,7 +102,7 @@ namespace Project_Mars.Pages
 
         public void EditEducationRecord(IWebDriver driver, string newcollegeUniversityName, string newcountryOfCollegeUniversity, string newtitle, string newdegree, string newyearOfGraduation)
         {
-            IWebElement editButton = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[4]/div/div[2]/div/table/tbody[1]/tr/td[6]/span[1]/i"));
+            IWebElement editButton = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[4]/div/div[2]/div/table/tbody[last()]/tr/td[6]/span[1]/i"));
             editButton.Click();
 
             IWebElement collegeUniversityNameTextbox = driver.FindElement(By.XPath("//input[@placeholder='College/University Name']"));
@@ -133,7 +135,31 @@ namespace Project_Mars.Pages
 
             IWebElement updateButton = driver.FindElement(By.XPath("//input[@value='Update']"));
             updateButton.Click();
+            Thread.Sleep(5000);
+
+
+        }
+
+        public void CancelEditOperation(IWebDriver driver, string newtitle)
+        {
             Thread.Sleep(3000);
+            IWebElement editButton = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[4]/div/div[2]/div/table/tbody[last()]/tr/td[6]/span[1]/i"));
+            editButton.Click();
+            Thread.Sleep(3000);
+            IWebElement titleDropdownbox = driver.FindElement(By.XPath("//select[@name='title']"));
+            titleDropdownbox.Click();
+            titleDropdownbox.SendKeys(newtitle);
+            Thread.Sleep(2000);
+            IWebElement cancelButton = driver.FindElement(By.XPath("//input[@value='Cancel']"));
+            cancelButton.Click();
+            Thread.Sleep(2000);
+            IWebElement eeditButton = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[4]/div/div[2]/div/table/tbody[last()]/tr/td[6]/span[1]/i"));
+            eeditButton.Click();
+
+            IWebElement updateButton = driver.FindElement(By.XPath("//input[@value='Update']"));
+            updateButton.Click();
+            Thread.Sleep(2000);
+
 
 
         }
