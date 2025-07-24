@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Turnupportal2025.Utilities;
 using static Microsoft.ApplicationInsights.MetricDimensionNames.TelemetryContext;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
@@ -68,9 +69,9 @@ namespace Project_Mars.NUnitTests
         {
             EducationPage educationPageObj = new EducationPage();
             educationPageObj.CreateEducationRecord(driver, collegeUniversityName, countryOfCollegeUniversity, title, degree, yearOfGraduation);
-            
-            string popupAlert = educationPageObj.BlankField(driver);
-            if (popupAlert == "Please enter all the fields")
+            IWebElement popupAlert = driver.FindElement(By.XPath("//div[@class='ns-box ns-growl ns-effect-jelly ns-type-error ns-show']"));
+            //string popupAlert = educationPageObj.BlankField(driver);
+            if (popupAlert.Text == "Please enter all the fields")
             {
                 Assert.Pass("Blank field record not accepted and Popup message says please enter all fields");
             }
@@ -239,7 +240,41 @@ namespace Project_Mars.NUnitTests
                 Assert.Fail("Canceling an edit operation should correctly discards changes and Subsequent edits respect the cancellation and do not save unexpected changes. Yes system is not doing this");
             }
         }
-      
+        [Test(Description = "Delete Education Record")]
+        [TestCase("mumbai university", "India", "PHD", "Economics", "2007")]
+        [TestCase("model college", "Switzerland", "M.B.A", "Commerce", "2020")]
+        [TestCase("newyork university", "United States", "MFA", "Science", "2001")]
+        [TestCase("american college", "New Zealand", "Associate", "Arts", "2024")]
+        public void DeleteEducationRecord(string collegeUniversityName, string countryOfCollegeUniversity, string title, string degree, string yearOfGraduation)
+        {
+            EducationPage educationPageObj = new EducationPage();
+            educationPageObj.CreateEducationRecord(driver, collegeUniversityName, countryOfCollegeUniversity, title, degree, yearOfGraduation);
+            IWebElement newuniversity = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[4]/div/div[2]/div/table/tbody[last()]/tr/td[2]"));
+            IWebElement newcountry = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[4]/div/div[2]/div/table/tbody[last()]/tr/td[1]"));
+            IWebElement newtitle = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[4]/div/div[2]/div/table/tbody[last()]/tr/td[3]"));
+            IWebElement newdegree = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[4]/div/div[2]/div/table/tbody[last()]/tr/td[4]"));
+            IWebElement newgraduationyear = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[4]/div/div[2]/div/table/tbody[last()]/tr/td[5]"));
+            if (newuniversity.Text == collegeUniversityName && newcountry.Text == countryOfCollegeUniversity && newtitle.Text == title && newdegree.Text == degree && newgraduationyear.Text == yearOfGraduation)
+            {
+                Console.WriteLine("record created successfully");
+            }
+            else
+            {
+                Console.WriteLine("record creation unsuccessful");
+            }
+
+            educationPageObj.DeleteEducationRecord(driver);
+            Wait.WaitToBeClickable(driver, "XPath", "//div[@class='ns-box ns-growl ns-effect-jelly ns-type-success ns-show']", 2);
+            IWebElement popupAlert = driver.FindElement(By.XPath("//div[@class='ns-box ns-growl ns-effect-jelly ns-type-success ns-show']"));
+            if(popupAlert.Text == "Education entry successfully removed")
+            {
+                Assert.Pass("Record deleted successfully");
+            }
+            else
+            {
+                Assert.Fail("Record not deleted");
+            }
+        }
 
 
 
