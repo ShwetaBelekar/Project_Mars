@@ -13,10 +13,14 @@ namespace Project_Mars.BaseClass
 {
     public class BaseTest
     {
-        public IWebDriver driver;
+        protected IWebDriver driver;
+        protected LoginPage loginPageObj;
+        protected HomeToEducationPage homeToEducationPageObj;
 
-        [SetUp]
+
        
+
+        [OneTimeSetUp]
         public void Open()
         {
             driver = new ChromeDriver();
@@ -24,7 +28,7 @@ namespace Project_Mars.BaseClass
             LoginPage loginPageObj = new LoginPage();
             loginPageObj.LoginActions(driver);
 
-            loginPageObj.VerifyUserInHomePage(driver);
+            //loginPageObj.VerifyUserInHomePage(driver);
 
             //HomeToEducationPage homeToEducationPageObj = new HomeToEducationPage();
             //homeToEducationPageObj.NavigateToEducation(driver);
@@ -36,32 +40,38 @@ namespace Project_Mars.BaseClass
         [OneTimeTearDown]
         public void CleanUp()
         {
-            IWebDriver driver = new ChromeDriver();
-            LoginPage loginPageObj = new LoginPage();
-            loginPageObj.LoginActions(driver);
+            //IWebDriver driver = new ChromeDriver();
+            //LoginPage loginPageObj = new LoginPage();
+            //loginPageObj.LoginActions(driver);
 
-            HomeToEducationPage homeToEducationPageObj = new HomeToEducationPage();
-            homeToEducationPageObj.NavigateToEducation(driver);
+            if (TestContext.CurrentContext.Test.Properties["Category"].Contains("Education"))
+            {
+                try
+                {
+                    HomeToEducationPage homeToEducationPageObj = new HomeToEducationPage();
+                    homeToEducationPageObj.NavigateToEducation(driver);
 
-           try
-           {
-
-
-                // Delete languages logic here
-                var deleteButtons = driver.FindElements(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[4]/div/div[2]/div/table/tbody/tr/td[6]/span[2]/i"));
+                    // Delete languages logic here
+                    var deleteButtons = driver.FindElements(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[4]/div/div[2]/div/table/tbody/tr/td[6]/span[2]/i"));
                     for (int i = deleteButtons.Count - 1; i >= 0; i--)
                     {
                         deleteButtons[i].Click();
                     }
-           }
-           catch (Exception ex)
-           {
+                }
+                catch (Exception ex)
+                {
                     Console.WriteLine($"Error during cleanup: {ex.Message}");
-           }
-           finally
-            {
+                }
+                finally
+                {
                     driver.Quit();
+                }
             }
+            
+
+
+
+          
         }
 
     }

@@ -17,6 +17,7 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 namespace Project_Mars.NUnitTests
 {
     [TestFixture]
+    [Category("Education")]
     public class Education_Tests : BaseTest
     {
 
@@ -25,10 +26,10 @@ namespace Project_Mars.NUnitTests
         {
             //driver = new ChromeDriver();
 
-            //LoginPage loginPageObj = new LoginPage();
+            LoginPage loginPageObj = new LoginPage();
             //loginPageObj.LoginActions(driver);
 
-            //loginPageObj.VerifyUserInHomePage(driver);
+            loginPageObj.VerifyUserInHomePage(driver);
 
             HomeToEducationPage homeToEducationPageObj = new HomeToEducationPage();
             homeToEducationPageObj.NavigateToEducation(driver);
@@ -279,14 +280,14 @@ namespace Project_Mars.NUnitTests
 
 
 
-        [TearDown]
-        public void Close()
-        {
-            if (driver != null)
-            {
-                driver.Quit();
-            }
-        }
+        //[TearDown]
+        //public void Close()
+        //{
+        //    if (driver != null)
+        //    {
+        //        driver.Quit();
+        //    }
+        //}
 
 
     }
