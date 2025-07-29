@@ -24,28 +24,28 @@ namespace Project_Mars.Pages
         private IWebElement updateButton => driver.FindElement(By.XPath("//input[@value='Update']"));
 
         private IWebElement deleteButton => driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[5]/div[1]/div[2]/div/table/tbody[last()]/tr/td[4]/span[2]/i"));
-        public void CreateCertificationRecord(IWebDriver driver)
+        public void CreateCertificationRecord(IWebDriver driver, string certificateaward, string certificatefrom, string year)
         {
-            
+            this.driver = driver;
             addNewButton.Click();
 
             
             certificationOrAwardTextbox.Click();
-            certificationOrAwardTextbox.SendKeys(""); 
+            certificationOrAwardTextbox.SendKeys(certificateaward); 
 
             
             certifiedFromTextbox.Click();
-            certifiedFromTextbox.SendKeys("");
+            certifiedFromTextbox.SendKeys(certificatefrom);
 
             
             yearDropdownButton.Click();
-            yearDropdownButton.SendKeys("");
+            yearDropdownButton.SendKeys(year);
 
            
             addButton.Click();
 
-           
-            cancelButton.Click();
+
+            Thread.Sleep(7000);
 
 
 
@@ -55,8 +55,8 @@ namespace Project_Mars.Pages
         {
             
             editButton.Click();
+            cancelButton.Click();
 
-            
             updateButton.Click();
 
         }

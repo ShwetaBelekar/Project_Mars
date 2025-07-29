@@ -23,6 +23,6 @@
     <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="138.0.7204.4900" />
   </ItemGroup>
 
-  <ProjectExtensions><VisualStudio><UserProperties json_x0020_file_4educationfile_1json__JsonSchema="https://api.app-prg1.zerops.io/api/rest/public/settings/import-project-yml-json-schema.json" /></VisualStudio></ProjectExtensions>
+  <ProjectExtensions><VisualStudio><UserProperties /></VisualStudio></ProjectExtensions>
 
 </Project>
