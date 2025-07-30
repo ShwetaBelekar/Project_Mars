@@ -28,41 +28,33 @@ namespace Project_Mars.Pages
         {
             this.driver = driver;
             addNewButton.Click();
-
-            
             certificationOrAwardTextbox.Click();
             certificationOrAwardTextbox.SendKeys(certificateaward); 
-
-            
             certifiedFromTextbox.Click();
             certifiedFromTextbox.SendKeys(certificatefrom);
-
-            
             yearDropdownButton.Click();
             yearDropdownButton.SendKeys(year);
-
-           
             addButton.Click();
-
-
-            Thread.Sleep(7000);
-
-
-
-
+            Thread.Sleep(5000);
         }
-        public void EditCertificationRecord(IWebDriver driver)
+        public void EditCertificationRecord(IWebDriver driver, string newcertificateaward, string newcertificatefrom, string newyear)
         {
-            
+            this.driver = driver;
             editButton.Click();
-            cancelButton.Click();
-
+            certificationOrAwardTextbox.Clear();
+            certificationOrAwardTextbox.SendKeys(newcertificateaward);
+            certifiedFromTextbox.Clear();
+            certifiedFromTextbox.SendKeys(newcertificatefrom);
+            //yearDropdownButton.Clear();
+            yearDropdownButton.SendKeys(newyear);
+            Thread.Sleep(3000);
             updateButton.Click();
+            Thread.Sleep(2000);
 
         }
         public void DeleteCertificationRecord(IWebDriver driver)
         {
-            
+            cancelButton.Click();
             deleteButton.Click();
         }
     }

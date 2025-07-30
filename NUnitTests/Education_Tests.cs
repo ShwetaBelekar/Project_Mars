@@ -1,6 +1,6 @@
 ﻿using NUnit.Framework;
 using OpenQA.Selenium;
-using OpenQA.Selenium.BiDi.Modules.Log;
+using OpenQA.Selenium.BiDi;
 using OpenQA.Selenium.Chrome;
 using Project_Mars.BaseClass;
 using Project_Mars.Pages;
