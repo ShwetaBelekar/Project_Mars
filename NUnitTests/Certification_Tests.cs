@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Turnupportal2025.Utilities;
 
 namespace Project_Mars.NUnitTests
 {
@@ -159,5 +160,84 @@ namespace Project_Mars.NUnitTests
                 Assert.Fail("record not edited");
             }
         }
+        [Test(Description = "Canceling an edit operation should correctly discards changes but system is not doing this it is saving unexpected changes")]
+        [TestCase("Painting", "ArtsSchool", "2022", "Drawing")]
+        public void Cancelinganeditoperationcorrectlydiscardschanges(string certificateaward, string certificatefrom, string year, string updatedcertificateaward)
+        {
+            CertificationsPage certificationsPageObj = new CertificationsPage();
+            certificationsPageObj.CreateCertificationRecord(driver, certificateaward, certificatefrom, year);
+            IWebElement newcertificateaward = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[5]/div[1]/div[2]/div/table/tbody[last()]/tr/td[1]"));
+            IWebElement newcertificatefrom = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[5]/div[1]/div[2]/div/table/tbody[last()]/tr/td[2]"));
+            IWebElement newyear = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[5]/div[1]/div[2]/div/table/tbody[last()]/tr/td[3]"));
+            if (newcertificateaward.Text == certificateaward && newcertificatefrom.Text == certificatefrom && newyear.Text == year)
+            {
+                Console.WriteLine("record created successfully");
+            }
+            else
+            {
+                Console.WriteLine("record creation unsuccessful");
+            }
+            certificationsPageObj.CancelEditOperation(driver, updatedcertificateaward);
+            IWebElement Certificateaward = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[5]/div[1]/div[2]/div/table/tbody[last()]/tr/td[1]"));
+            if (Certificateaward.Text == updatedcertificateaward)
+            {
+                Assert.Pass("Canceling an edit operation should correctly discards changes and Subsequent edits respect the cancellation and do not save unexpected changes. No system is not doing this");
+            }
+            else
+            {
+                Assert.Fail("Canceling an edit operation should correctly discards changes and Subsequent edits respect the cancellation and do not save unexpected changes. Yes system is not doing this");
+            }
+        }
+
+        [Test(Description = "Delete Certification Record")]
+        [TestCase("Test Analyst", "Industry Connect", "2020")]
+        [TestCase("Web Developer", "Connect Industry", "2007")]
+        [TestCase("Data Analyst", "IT School", "2024")]
+        [TestCase("Data Science", "NZ University", "2017")]
+        public void DeleteCertificationRecord(string certificateaward, string certificatefrom, string year)
+        {
+            CertificationsPage certificationsPageObj = new CertificationsPage();
+            certificationsPageObj.CreateCertificationRecord(driver, certificateaward, certificatefrom, year);
+            IWebElement newcertificateaward = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[5]/div[1]/div[2]/div/table/tbody[last()]/tr/td[1]"));
+            IWebElement newcertificatefrom = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[5]/div[1]/div[2]/div/table/tbody[last()]/tr/td[2]"));
+            IWebElement newyear = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[5]/div[1]/div[2]/div/table/tbody[last()]/tr/td[3]"));
+            if (newcertificateaward.Text == certificateaward && newcertificatefrom.Text == certificatefrom && newyear.Text == year)
+            {
+                Console.WriteLine("record created successfully");
+            }
+            else
+            {
+                Console.WriteLine("record creation unsuccessful");
+            }
+            certificationsPageObj.DeleteCertificationRecord(driver);
+            bool testPassed = false;
+            try
+            {
+                Wait.WaitToBeVisible(driver, "XPath", "//div[@class='ns-box ns-growl ns-effect-jelly ns-type-success ns-show']", 4);
+                IWebElement popupAlert = driver.FindElement(By.XPath("//div[@class='ns-box ns-growl ns-effect-jelly ns-type-success ns-show']"));
+                string alertText = popupAlert.Text;
+                Console.WriteLine("Alert text: " + alertText);
+                testPassed = true;
+                //Assert.Pass(alertText);
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Exception: " + ex.Message);
+                //Assert.Fail("No alert present");
+            }
+            if (testPassed)
+            {
+                Assert.Pass("Test pass");
+            }
+            else
+            {
+                Assert.Fail("Test failed");
+            }
+
+
+            
+        }
+
     }
 }

@@ -52,9 +52,19 @@ namespace Project_Mars.Pages
             Thread.Sleep(2000);
 
         }
+        public void CancelEditOperation(IWebDriver driver, string updatedcertificateaward)
+        {
+            editButton.Click();
+            certificationOrAwardTextbox.Clear();
+            certificationOrAwardTextbox.SendKeys(updatedcertificateaward);
+            cancelButton.Click();
+            editButton.Click();
+            updateButton.Click();
+            Thread.Sleep(2000);
+        }
         public void DeleteCertificationRecord(IWebDriver driver)
         {
-            cancelButton.Click();
+            Thread.Sleep(2000);
             deleteButton.Click();
         }
     }
