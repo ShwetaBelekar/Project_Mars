@@ -1,0 +1,310 @@
+using System;
+using System.Collections.Generic;
+using NUnit.Framework;
+using OpenQA.Selenium;
+using OpenQA.Selenium.BiDi;
+using OpenQA.Selenium.Chrome;
+using Project_Mars.Hooks;
+using Project_Mars.Pages;
+using Project_Mars.Utilities;
+using Reqnroll;
+using Reqnroll.BoDi;
+using SeleniumExtras.WaitHelpers;
+using Turnupportal2025.Utilities;
+
+namespace Project_Mars.StepDefinition
+{
+    [Binding]
+    public sealed class LanguageFeatureStepDefinitions 
+    {
+        private IWebDriver driver;
+        public LanguageFeatureStepDefinitions(IWebDriver driver)
+        {
+            this.driver = driver;
+        }
+        [Given("I login to Project Mars")]
+        public void GivenILoginToProjectMars()
+        {
+            //driver = new ChromeDriver();
+
+            LoginPage loginPageObj = new LoginPage();
+            loginPageObj.LoginActions(driver);
+
+            loginPageObj.VerifyUserInHomePage(driver);
+        }
+
+        [When("I navigate to language")]
+        public void WhenINavigateToLanguage()
+        {
+            HomeToLanguagePage homeToLanguagePageObj = new HomeToLanguagePage();
+            homeToLanguagePageObj.NavigateToLanguage(driver);
+        }
+        
+        [When("I create valid {string} and valid {string} record")]
+        public void WhenICreateValidAndValidRecord(string Language, string Level)
+        {
+            LanguagePage languagePageObj = new LanguagePage();
+            languagePageObj.CreateLanguageRecord(driver, Language, Level);
+        }
+       
+        [Then("the record for valid {string} and {string} should be created successfully")]
+        public void ThenTheRecordForValidAndShouldBeCreatedSuccessfully(string Language, string Level)
+        {
+            LanguagePage languagePageObj = new LanguagePage();
+            IWebElement newLanguage = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/table/tbody[last()]/tr/td[1]"));
+            IWebElement newLevel = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/table/tbody[last()]/tr/td[2]"));
+
+            if (newLanguage.Text == Language && newLevel.Text == Level)
+            {
+                Assert.Pass("record created successfully");
+            }
+            else
+            {
+                Assert.Fail("record creation unsuccessful");
+            }
+        }
+
+        [When("i see existing {string} and {string}")]
+        public void WhenISeeExistingAnd(string Language, string Level)
+        {
+            LanguagePage languagePageObj = new LanguagePage();
+            languagePageObj.CreateLanguageRecord(driver, Language, Level);
+        }
+
+        [When("I edit existing Language and Level with {string} and {string}")]
+        public void WhenIEditExistingLanguageAndLevelWithAnd(string NewLanguage, string NewLevel)
+        {
+            LanguagePage languagePageObj = new LanguagePage();
+            languagePageObj.EditLanguageRecord(driver, NewLanguage, NewLevel);
+        }
+        [Then("the {string} and {string} record should be updated successfully")]
+        public void ThenTheAndRecordShouldBeUpdatedSuccessfully(string NewLanguage, string NewLevel)
+        {
+            LanguagePage languagePageObj = new LanguagePage();
+            string editedLanguage = languagePageObj.GetEditedLanguage(driver);
+            string editedLevel = languagePageObj.GetEditedLevel(driver);
+            Assert.That(editedLanguage == NewLanguage, "Expected edited language and actual edited language do not match");
+            Assert.That(editedLevel == NewLevel, "Expected edited level and actual edited level do not match");
+        }
+
+       
+        [When("i see existing {string} and {string} record")]
+        public void WhenISeeExistingAndRecord(string Language, string Level)
+        {
+            LanguagePage languagePageObj = new LanguagePage();
+            languagePageObj.CreateLanguageRecord(driver, Language, Level);
+        }
+
+        [When("I delete the existing language record")]
+        public void WhenIDeleteTheExistingLanguageRecord()
+        {
+            LanguagePage languagePageObj = new LanguagePage();
+            languagePageObj.DeleteLanguageRecord(driver);
+        }
+
+        [Then("i should see message that record deleted successfully")]
+        public void ThenIShouldSeeMessageThatRecordDeletedSuccessfully()
+        {
+            LanguagePage languagePageObj = new LanguagePage();
+            Wait.WaitToBeClickable(driver, "XPath", "//div[@class='ns-box ns-growl ns-effect-jelly ns-type-success ns-show']", 2);
+            IWebElement popupAlert = driver.FindElement(By.XPath("//div[@class='ns-box ns-growl ns-effect-jelly ns-type-success ns-show']"));
+            if (popupAlert.Text == "English has been deleted from your languages")
+            {
+                Assert.Pass("Record Deleted Succesfully");
+            }
+            else
+            {
+                Assert.Fail("Record not deleted");
+            }
+        }
+
+
+            [When("I create blank {string} and valid {string} record")]
+        public void WhenICreateBlankAndValidRecord(string Language, string Level)
+        {
+            LanguagePage languagePageObj = new LanguagePage();
+            languagePageObj.CreateBlankLanguageRecord(driver, Language, Level);
+        }
+
+        [Then("I should see error message for blank {string} name")]
+        public void ThenIShouldSeeErrorMessageForBlankName(string Language)
+        {
+            LanguagePage languagePageObj = new LanguagePage();
+            string popupAlert = languagePageObj.BlankLanguage(driver);
+            if (popupAlert == "Please enter language and level")
+            {
+                Assert.Pass("Blank language record not accepted");
+            }
+            else
+            {
+                Assert.Fail("Blank language record is accepted");
+            }
+
+
+        }
+
+        [When("I create valid {string} and blank {string} record")]
+        public void WhenICreateValidAndBlankRecord(string Language, string Level)
+        {
+            LanguagePage languagePageObj = new LanguagePage();
+            languagePageObj.CreateBlankLevelRecord(driver, Language, Level);
+        }
+
+        [Then("I should see error message for blank {string}")]
+        public void ThenIShouldSeeErrorMessageForBlank(string Level)
+        {
+            LanguagePage languagePageObj = new LanguagePage();
+            string popupAlert = languagePageObj.BlankLevel(driver);
+            if (popupAlert == "Please enter language and level")
+            {
+                Assert.Pass("Blank level record not accepted");
+            }
+            else
+            {
+                Assert.Fail("Blank level record is accepted");
+            }
+        }
+
+        [When("I create invalid {string} and valid {string}")]
+        public void WhenICreateInvalidAndValid(string Language, string Level)
+        {
+            LanguagePage languagePageObj = new LanguagePage();
+            languagePageObj.CreateInvalidLanguageRecord(driver, Language, Level);
+        }
+
+        [Then("if the system accepts invalid {string} and valid {string} then there is error in the system")]
+        public void ThenIfTheSystemAcceptsInvalidAndValidThenThereIsErrorInTheSystem(string Language, string Level)
+        {
+            LanguagePage languagePageObj = new LanguagePage();
+            IWebElement newLanguage = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/table/tbody[last()]/tr/td[1]"));
+            if (newLanguage.Text == Language)
+            {
+                Assert.Pass("Error in the system");
+            }
+            else
+            {
+                Assert.Fail("No Error in the system");
+            }
+
+        }
+
+
+        
+        
+        [When("I update {string} and {string} with new {string} and {string}")]
+        public void WhenIUpdateAndWithNewAnd(string OldLanguage, string OldLevel, string NewLanguage, string NewLevel)
+        {
+            LanguagePage languagePageObj = new LanguagePage();
+            languagePageObj.OldLanguageRecord(driver, OldLanguage, OldLevel);
+            languagePageObj.NewLanguageRecord(driver, NewLanguage, NewLevel);
+        }
+
+        [Then("the {string} and {string} should be updated successfully")]
+        public void ThenTheAndShouldBeUpdatedSuccessfully(string NewLanguage, string NewLevel)
+        {
+            LanguagePage languagePageObj = new LanguagePage();
+            string editedLanguage = languagePageObj.NewEditedLanguage(driver);
+            string editedLevel = languagePageObj.NewEditedLevel(driver);
+            Assert.That(editedLanguage == NewLanguage, "Expected edited language and actual edited language do not match");
+            Assert.That(editedLevel == NewLevel, "Expected edited level and actual edited level do not match");
+        }
+
+        [Then("After creating four {string} with {string} successfully addnew button should not visible restricting user to add language")]
+        public void ThenAfterCreatingFourWithSuccessfullyAddnewButtonShouldNotVisibleRestrictingUserToAddLanguage(string Language, string Level)
+        {
+            LanguagePage languagePageObj = new LanguagePage();
+            languagePageObj.CreateLanguageRecord(driver, Language, Level);
+            IWebElement newLanguage = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/table/tbody[last()]/tr/td[1]"));
+            IWebElement newLevel = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/table/tbody[last()]/tr/td[2]"));
+
+            if (newLanguage.Text == Language && newLevel.Text == Level)
+            {
+                Assert.Pass("record created successfully");
+            }
+            else
+            {
+                Assert.Fail("record creation unsuccessful");
+            }
+
+            
+        }
+        [When("i create {string} with {string} record successfully")]
+        public void WhenICreateWithRecordSuccessfully(string Language, string Level)
+        {
+            LanguagePage languagePageObj = new LanguagePage();
+            languagePageObj.CreateLanguageRecord(driver, Language, Level);
+            IWebElement newLanguage = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/table/tbody[last()]/tr/td[1]"));
+            if(newLanguage.Text == "English")
+            {
+                Console.WriteLine("Record created successfully");
+            }
+            else
+            {
+                Console.WriteLine("Record creation unsuccessful");
+            }
+        }
+
+        [Then("i create duplicate {string} with {string} record")]
+        public void ThenICreateDuplicateWithRecord(string duplicatelanguage, string duplicatelevel)
+        {
+            LanguagePage languagePageObj = new LanguagePage();
+            languagePageObj.DuplicateLanguageRecord(driver, duplicatelanguage, duplicatelevel);
+        }
+
+        [Then("i should see error message for duplicate record")]
+        public void ThenIShouldSeeErrorMessageForDuplicateRecord()
+        {
+            Wait.WaitToBeClickable(driver, "XPath", "//div[contains(@class, 'ns-type-error') and contains(@class, 'ns-show')]", 1);
+            IWebElement popupAlert = driver.FindElement(By.XPath("//div[contains(@class, 'ns-type-error') and contains(@class, 'ns-show')]"));
+            if (popupAlert.Text == "This language is already exist in your language list.")
+            {
+                Assert.Pass("Duplicate record not accepted");
+            }
+            else
+            {
+                Assert.Fail("Duplicate record accepted");
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    }
+}
